@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>William Hedén – Nervsystemsbaserad terapi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:        #8a8480;
+      --sage-light:  #c2bdb9;
+      --sage-dark:   #5a5550;
+      --cream:       #f5f3f0;
+      --cream-dark:  #eceae6;
+      --terra:       #b85c40;
+      --terra-light: #cc7a5f;
+      --terra-dark:  #8f4530;
+      --charcoal:    #2a2825;
+      --muted:       #6b6660;
+      --white:       #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Philosopher', serif; font-weight: 400; }
+
+    /* ─── NAV ─────────────────────────────────────────────────── */
+    /* Nav is fixed to the top from the start; transparent on the
+       hero, gains a tinted background once scrolled past the hero,
+       and hides/shows based on scroll direction. */
+    #site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: transparent;
+      transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+    }
+    #site-nav.scrolled {
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+    #site-nav.nav-hidden {
+      transform: translateY(-100%);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 3.5rem;
+      height: 76px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Logo – pushed far left, same font as the rest of the site */
+    .nav-logo {
+      font-family: 'Philosopher', serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.02em;
+      color: rgba(255,255,255,0.95);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.3s;
+      justify-self: start;
+      margin-left: -1rem;
+    }
+    #site-nav.scrolled .nav-logo { color: var(--sage-dark); }
+
+    /* Links – center */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+      justify-self: center;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    #site-nav.scrolled .nav-links a { color: var(--muted); }
+    #site-nav.scrolled .nav-links a:hover { color: var(--sage-dark); }
+
+    /* CTA – pushed far right, square with soft corners */
+    .nav-right { justify-self: end; margin-right: -1rem; }
+    .nav-cta {
+      background: var(--terra);
+      color: var(--white);
+      padding: 0.65rem 1.5rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--terra-dark); transform: translateY(-1px); }
+
+    /* ─── HERO ─────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem 10vh;
+      overflow: hidden;
+    }
+
+    /* Video background */
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(30,55,40,0.45) 0%,
+        rgba(30,55,40,0.35) 60%,
+        rgba(10,25,15,0.65) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+      margin-top: 0.5rem;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 540px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--terra);
+      color: var(--white);
+      padding: 0.9rem 2.25rem;
+      border-radius: 3px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--terra-dark); transform: translateY(-1px); }
+
+    /* ─── SECTIONS ─────────────────────────────────────────────── */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 0.9rem;
+      display: block;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--sage-dark);
+      margin-bottom: 1.25rem;
+      max-width: 640px;
+    }
+    .section-title.centered { margin-left: auto; margin-right: auto; text-align: center; }
+    .section-lead {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+    .section-lead.centered { margin-left: auto; margin-right: auto; text-align: center; }
+
+    /* ─── INTRO ────────────────────────────────────────────────── */
+    /* ─── SERVICES ────────────────────────────────────────────── */
+    #services { background: var(--cream); }
+    #services .section-title { max-width: none; }
+    .services-intro { margin-bottom: 3rem; }
+    .services-intro p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+
+    /* Comparison bullet lists */
+    .method-compare-list {
+      list-style: none;
+      margin-top: 1.25rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .method-compare-item {
+      padding-left: 1rem;
+      border-left: 2px solid var(--cream-dark);
+    }
+    .card-tt .method-compare-item  { border-color: var(--terra); }
+    .card-mv .method-compare-item  { border-color: var(--sage-dark); }
+    .method-compare-item.shared    { border-color: var(--sage-light); }
+    .method-dim {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+    .card-tt .method-dim  { color: var(--terra); }
+    .card-mv .method-dim  { color: var(--sage-dark); }
+    .method-compare-item.shared .method-dim { color: var(--sage); }
+    .method-compare-item p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Video CTA wrap */
+    .video-cta-wrap { position: relative; overflow: hidden; }
+    .video-strip {
+      width: 100%;
+      max-height: 520px;
+      min-height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+    .video-cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(20,16,12,0.58);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .video-cta-overlay h2 {
+      font-family: 'Philosopher', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .video-cta-overlay p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.78);
+      font-weight: 300;
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+    .video-cta-contacts {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .video-cta-contact {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+    .video-cta-contact:hover { color: var(--white); }
+    .video-cta-contact svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.7; }
+
+    /* (legacy selector, no longer used as a section) */
+    #methods { background: var(--cream-dark); }
+    .methods-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .method-card {
+      background: var(--white);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .method-card-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+    .method-card-body {
+      padding: 2rem 2rem 2.25rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .method-card-body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 2rem; right: 2rem;
+      height: 2px;
+      background: var(--terra);
+    }
+    .method-card h3 {
+      font-size: 1.35rem;
+      color: var(--sage-dark);
+      margin-bottom: 1rem;
+    }
+    .method-card p { color: var(--muted); font-weight: 300; font-size: 0.95rem; line-height: 1.7; }
+    .method-card p + p { margin-top: 0.75rem; }
+    .method-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: auto;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .method-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .method-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--sage-dark);
+    }
+    .method-meta-item svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+    /* ─── CONCEPTS ─────────────────────────────────────────────── */
+    #concepts { background: var(--sage-light); }
+    #concepts .section-lead { color: var(--sage-dark); }
+    .concepts-header { text-align: center; margin-bottom: 3.5rem; }
+    .concepts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .concepts-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .concepts-grid { grid-template-columns: 1fr; }
+    }
+    .concept-box {
+      background: var(--white);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: box-shadow 0.25s, transform 0.2s;
+    }
+    .concept-box:hover { box-shadow: 0 10px 36px rgba(0,0,0,0.07); transform: translateY(-3px); }
+    .concept-icon {
+      width: 44px; height: 44px;
+      background: var(--cream-dark);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .concept-icon svg { width: 22px; height: 22px; }
+    .concept-box h4 {
+      font-family: 'Philosopher', serif;
+      font-size: 1.05rem;
+      color: var(--sage-dark);
+    }
+    .concept-box p { font-size: 0.875rem; color: var(--muted); font-weight: 300; line-height: 1.65; }
+
+    /* ─── FOR WHOM ─────────────────────────────────────────────── */
+    #for-whom {
+      position: relative;
+      overflow: hidden;
+    }
+    .for-whom-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .for-whom-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(30,65,45,0.88) 0%, rgba(40,80,55,0.78) 100%);
+      z-index: 1;
+    }
+    #for-whom .section-inner { position: relative; z-index: 2; }
+    #for-whom .section-label { color: var(--sage-light); }
+    #for-whom .section-title { color: var(--white); }
+    .for-whom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .for-whom-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .for-whom-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--terra-light);
+      flex-shrink: 0;
+      margin-top: 0.6rem;
+    }
+    .for-whom-item p { color: rgba(255,255,255,0.88); font-size: 0.95rem; font-weight: 300; }
+
+    /* ─── ABOUT ────────────────────────────────────────────────── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-photo {
+      border-radius: 2rem;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .about-body p { color: var(--muted); font-weight: 300; margin-bottom: 1rem; }
+
+    /* video strip between about and contact */
+    .video-strip {
+      width: 100%;
+      max-height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ─── CONTACT ──────────────────────────────────────────────── */
+    #contact { background: var(--cream); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-info p.lead {
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+    .contact-details { display: flex; flex-direction: column; gap: 1.25rem; }
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .contact-icon-wrap {
+      width: 44px; height: 44px;
+      background: var(--cream-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon-wrap svg { width: 18px; height: 18px; }
+    .contact-text strong {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--sage-dark);
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+    .contact-text a,
+    .contact-text span { color: var(--muted); font-size: 0.95rem; font-weight: 300; text-decoration: none; }
+    .contact-text a:hover { color: var(--terra); }
+    .contact-map {
+      border-radius: 1.5rem;
+      overflow: hidden;
+      border: none;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    /* ─── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.55);
+      font-size: 0.9rem;
+    }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+    .footer-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem 3rem;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer-brand {
+      font-family: 'Philosopher', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+      max-width: 260px;
+    }
+    .footer-heading {
+      font-family: 'Philosopher', serif;
+      font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+    .footer-col p,
+    .footer-col a { display: block; margin-bottom: 0.6rem; font-weight: 300; }
+    .footer-book-btn {
+      display: inline-block;
+      background: var(--terra);
+      color: var(--white);
+      padding: 0.7rem 1.5rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .footer-book-btn:hover { background: var(--terra-dark); color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-legal-links { display: flex; gap: 1.5rem; }
+    .footer-legal-links button {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.78rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+    }
+    .footer-legal-links button:hover { color: var(--white); }
+
+    /* legal modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 500;
+      padding: 2rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--cream);
+      border-radius: 1.25rem;
+      max-width: 560px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 2.5rem;
+      position: relative;
+    }
+    .modal-box h3 { font-family: 'Philosopher', serif; color: var(--sage-dark); margin-bottom: 1rem; font-size: 1.4rem; }
+    .modal-box p { color: var(--muted); font-weight: 300; font-size: 0.92rem; margin-bottom: 0.9rem; }
+    .modal-close {
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--muted);
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--terra); }
+
+    @media (max-width: 700px) {
+      .footer-main { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .intro-grid,
+      .methods-grid,
+      .about-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { aspect-ratio: 4/3; }
+      .nav-links { gap: 1.5rem; }
+      .nav-links li:nth-child(1),
+      .nav-links li:nth-child(2) { display: none; }
+    }
+    @media (max-width: 620px) {
+      .nav-links { display: none; }
+      .nav-inner { grid-template-columns: 1fr auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ───────────────────────────────────────────────────── -->
+<section id="hero">
+
+  <!-- Background image -->
+  <img class="hero-video" src="assets/1h6b3474.jpg" alt="" />
+  <div class="hero-overlay"></div>
+
+  <!-- Nav anchored to bottom of hero -->
+  <nav id="site-nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">William Hedén</a>
+      <ul class="nav-links">
+        <li><a href="#services">Tjänster</a></li>
+        <li><a href="#concepts">Begrepp</a></li>
+        <li><a href="#about">Om mig</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#contact" class="nav-cta">Boka session</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero content -->
+  <div class="hero-content">
+    <h1 class="hero-title">Skonsamma, kroppsbaserade metoder som hjälper ditt nervsystem att landa</h1>
+    <p class="hero-sub">Så att du kan möta livet med större frihet och ro.</p>
+    <span class="hero-eyebrow">Nervsystemsbaserad terapi · Gnesta</span>
+  </div>
+
+</section>
+
+<!-- ─── SERVICES ────────────────────────────────────────────────── -->
+<section id="services">
+  <div class="section-inner">
+    <span class="section-label">Tjänster</span>
+    <h2 class="section-title">Kroppen bär det som orden inte når</h2>
+    <div class="services-intro">
+      <p>Många av oss bär på långvarig stress, spänning eller en känsla av att aldrig riktigt landa – utan att förstå varför. Ofta handlar det om att nervsystemet fastnat i gamla mönster, något som varken viljan eller tankekraften ensam kan förändra.</p>
+      <p>Jag arbetar med två skonsamma, kroppsbaserade metoder som båda utgår från nervsystemets naturliga förmåga att lära sig och förändras. De kompletterar varandra väl och kan kombineras utifrån dina behov och önskemål.</p>
+      <p>Du behöver inte göra något speciellt eller prestera. Vi börjar där du är och du är alltid fullt påklädd. I en Transforming Touch®-session ligger du bekvämt medan jag erbjuder lätt beröring. I Feldenkrais® utforskar vi enkla rörelser tillsammans i din egen takt. Det viktigaste är att du känner dig trygg.</p>
+    </div>
+    <div class="methods-grid">
+
+      <div class="method-card card-tt">
+        <img class="method-card-image" src="assets/img_9456.jpg" alt="Transforming Touch – lätt beröring" />
+        <div class="method-card-body">
+          <h3>Nervsystemsreglering med Transforming Touch®</h3>
+          <p>En regleringsfokuserad beröringsterapi som ger nervsystemet direkt tillgång till trygghet – via kroppen, inte via tanken. Metoden arbetar med djupt rotade mönster som formats tidigt i livet och som samtalet sällan når.</p>
+          <ul class="method-compare-list">
+            <li class="method-compare-item">
+              <span class="method-dim">Kontakt</span>
+              <p>Jag håller lätt och stilla på punkter på kroppen</p>
+            </li>
+            <li class="method-compare-item shared">
+              <span class="method-dim">Bidrar till</span>
+              <p>Nervsystemsreglering, trygghet och ro</p>
+            </li>
+            <li class="method-compare-item">
+              <span class="method-dim">Passar särskilt vid</span>
+              <p>Stress, trauma, anknytning och svårighet att landa</p>
+            </li>
+          </ul>
+          <div class="method-meta">
+            <div class="method-meta-row">
+              <div class="method-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                50 minuter
+              </div>
+              <div class="method-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 6v.01M18 17.99V18"/></svg>
+                1 000 kr inkl. moms
+              </div>
+            </div>
+            <div class="method-meta-row">
+              <div class="method-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                75 minuter
+              </div>
+              <div class="method-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 6v.01M18 17.99V18"/></svg>
+                1 400 kr inkl. moms
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-card card-mv">
+        <img class="method-card-image" src="assets/img_9445.jpg" alt="Feldenkrais" />
+        <div class="method-card-body">
+          <h3>Rörelsemedvetande med Feldenkrais®</h3>
+          <p>En utforskande rörelsepedagogik som lär upp nervsystemet inifrån – genom nyfikenhet och varsam uppmärksamhet på hur du rör dig. Istället för att rätta eller anstränga öppnar metoden för ny information till hjärnan.</p>
+          <ul class="method-compare-list">
+            <li class="method-compare-item">
+              <span class="method-dim">Kontakt</span>
+              <p>Jag gör olika utforskanden och rörelser av kroppen</p>
+            </li>
+            <li class="method-compare-item shared">
+              <span class="method-dim">Bidrar till</span>
+              <p>Nervsystemsreglering, kroppskännedom och lätthet</p>
+            </li>
+            <li class="method-compare-item">
+              <span class="method-dim">Passar särskilt vid</span>
+              <p>Smärta, stelhet och önskan att röra sig friare</p>
+            </li>
+          </ul>
+          <div class="method-meta">
+            <div class="method-meta-row">
+              <div class="method-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                50 minuter
+              </div>
+              <div class="method-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 6v.01M18 17.99V18"/></svg>
+                1 000 kr inkl. moms
+              </div>
+            </div>
+            <div class="method-meta-row">
+              <div class="method-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                75 minuter
+              </div>
+              <div class="method-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 6v.01M18 17.99V18"/></svg>
+                1 400 kr inkl. moms
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONCEPTS ───────────────────────────────────────────────── -->
+<section id="concepts">
+  <div class="section-inner">
+    <div class="concepts-header">
+      <span class="section-label">Grundläggande begrepp</span>
+      <h2 class="section-title centered">Ord du kanske möter</h2>
+      <p class="section-lead centered">Kortfattade förklaringar av centrala begrepp som hjälper dig förstå det vi arbetar med.</p>
+    </div>
+    <div class="concepts-grid">
+
+      <div class="concept-box">
+        <div class="concept-icon">
+          <!-- Brain / plasticity -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sage-dark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.5 2a5.5 5.5 0 0 1 5 3.18A5.5 5.5 0 0 1 22 10.5c0 2.5-1.5 4.7-3.8 5.6L17 22H7l-1.2-5.9A5.5 5.5 0 0 1 2 10.5a5.5 5.5 0 0 1 7.5-5.32"/>
+            <path d="M12 7v5M9 10h6"/>
+          </svg>
+        </div>
+        <h4>Hjärnans plasticitet</h4>
+        <p>Hjärnan förändras hela livet. Varje gång vi upplever något nytt – en rörelse, en känsla av trygghet, ett ögonblick av ro – skapas nya kopplingar. Det är detta som gör förändring möjlig, oavsett ålder.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-icon">
+          <!-- Heart / attachment -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            <path d="M8 12h8M12 8v8" stroke="var(--cream)" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <h4>Anknytningstrauma</h4>
+        <p>Uppstår när vi som barn inte fick tillräckligt konsekvent trygghet, närvaro eller omsorg. Det behöver inte handla om dramatiska händelser – frånvaro räcker. Nervsystemet lär sig tidigt att världen är osäker, och det mönstret bär vi ofta med oss in i vuxenlivet.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-icon">
+          <!-- Waves / regulation -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sage-dark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12c1.5-3 3-4.5 4.5-4.5S9 9 10.5 12s3 4.5 4.5 4.5S18 15 19.5 12 21 7.5 22 7.5"/>
+          </svg>
+        </div>
+        <h4>Nervsystemsreglering</h4>
+        <p>Nervsystemet styr hur vi svarar på stress, kontakt och vila. När det är reglerat känner vi oss trygga, närvarande och kapabla. Reglering betyder inte att aldrig bli påverkad, utan att kunna återhämta sig.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-icon">
+          <!-- Body / somatic -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sage-dark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="5" r="2"/>
+            <path d="M12 7v7M9 10h6M10 14l-2 6M14 14l2 6"/>
+          </svg>
+        </div>
+        <h4>Somatisk terapi</h4>
+        <p>Somatisk betyder kroppsbaserad. Somatiska metoder utgår från att kroppen bär på upplevelser och mönster som inte alltid nås genom samtal eller tanke. Genom rörelse, beröring och närvaro skapar vi tillgång till dessa lager – och möjlighet till förändring.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOR WHOM ────────────────────────────────────────────────── -->
+<section id="for-whom">
+  <img class="for-whom-bg" src="assets/img_9437.jpg" alt="" aria-hidden="true" />
+  <div class="for-whom-overlay"></div>
+  <div class="section-inner">
+    <span class="section-label">För vem</span>
+    <h2 class="section-title" style="color:var(--white);">Känner du igen dig?</h2>
+    <div class="for-whom-grid">
+      <div class="for-whom-item">
+        <div class="for-whom-dot"></div>
+        <p>Känner att stress, spänning eller oro sitter i kroppen snarare än går att tänka bort</p>
+      </div>
+      <div class="for-whom-item">
+        <div class="for-whom-dot"></div>
+        <p>Har varit i samtalsterapi men vill komplettera med något kroppsbaserat</p>
+      </div>
+      <div class="for-whom-item">
+        <div class="for-whom-dot"></div>
+        <p>Återhämtar dig från utmattning, trauma eller långvarig smärta</p>
+      </div>
+      <div class="for-whom-item">
+        <div class="for-whom-dot"></div>
+        <p>Vill röra dig och leva med större lätthet i vardagen</p>
+      </div>
+      <div class="for-whom-item">
+        <div class="for-whom-dot"></div>
+        <p>Söker ett tryggt, respektfullt och icke-dömande sammanhang</p>
+      </div>
+      <div class="for-whom-item">
+        <div class="for-whom-dot"></div>
+        <p>Vill hitta tillbaka till dig själv – till din egen känsla av trygghet och kapacitet</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ───────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="assets/img_0127.jpg" alt="William Hedén" />
+      </div>
+      <div class="about-body">
+        <span class="section-label">Om mig</span>
+        <h2 class="section-title">William Hedén</h2>
+        <p>Under flera år levde jag ett liv som såg framgångsrikt ut på utsidan – karriär inom managementkonsulting och snabbväxande bolag, högt tempo och ständig tillgänglighet. Men under ytan bar jag på djup ångest och ett mönster i relationer som jag inte förstod. Tillslut insåg jag att det inte var ett värdigt liv. Det var hösten 2021 som något förändrades.</p>
+        <p>Det som följde var en av de mest omvälvande perioderna i mitt liv. Jag gick med i tolvstegsprogrammet, påbörjade terapi med fokus på anknytningstrauma och hittade en meditationspraktik. En Vipassana-retreat. Mentorer och människor som visade vägen. Och gradvis en hel livsstilsomställning – hur jag jobbar, var jag bor, vilka relationer jag väljer, hur jag tar hand om min kropp. Jag har provat många olika terapiformer och kroppsbaserade metoder: gestaltterapi, Rolfing, Somatic Experiencing, A.R.T., NARM, Feldenkrais och Transforming Touch®. Det är ur den resan det här arbetet vuxit fram.</p>
+        <p>Jag möter dig med en uppriktig förståelse för hur det känns att bära på mönster som kroppen ännu inte fått bearbeta – och en genuin övertygelse om att förändring är möjlig. Du behöver inte veta vägen. Det räcker att du är redo att börja.</p>
+        <h3 style="font-size:1rem; color:var(--sage-dark); margin-top:1.75rem; margin-bottom:0.75rem; letter-spacing:0.04em; text-transform:uppercase; font-family:'Inter',sans-serif; font-weight:600;">Utbildning</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem;">
+          <li style="font-size:0.92rem; color:var(--muted); font-weight:300; padding-left:1.1rem; position:relative;"><span style="position:absolute; left:0; color:var(--terra);">–</span> NARM-informerad professionsutbildning (2026)</li>
+          <li style="font-size:0.92rem; color:var(--muted); font-weight:300; padding-left:1.1rem; position:relative;"><span style="position:absolute; left:0; color:var(--terra);">–</span> Transforming Touch®-praktikerutbildning med Stephen Terrell (2025–2026)</li>
+          <li style="font-size:0.92rem; color:var(--muted); font-weight:300; padding-left:1.1rem; position:relative;"><span style="position:absolute; left:0; color:var(--terra);">–</span> Feldenkrais®-praktikerutbildning (2023–2027)</li>
+          <li style="font-size:0.92rem; color:var(--muted); font-weight:300; padding-left:1.1rem; position:relative;"><span style="position:absolute; left:0; color:var(--terra);">–</span> Immunity to Change® Facilitator's Workshop med Robert Kegan (2022)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VIDEO CTA ─────────────────────────────────────────────────── -->
+<div class="video-cta-wrap" id="contact">
+  <video class="video-strip" autoplay muted loop playsinline>
+    <source src="assets/img_9453.mp4" type="video/mp4" />
+  </video>
+  <div class="video-cta-overlay">
+    <h2>Redo att ta ett första steg?</h2>
+    <p>Hör av dig om du har frågor eller vill boka ett inledande samtal på 20 minuter – utan kostnad och utan förpliktelse.</p>
+    <div class="video-cta-contacts">
+      <a href="mailto:pwheden@gmail.com" class="video-cta-contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        pwheden@gmail.com
+      </a>
+      <a href="tel:+46727177234" class="video-cta-contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.88a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        072 717 72 34
+      </a>
+      <span class="video-cta-contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Lydias Väg 6, Gnesta
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ──────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-col">
+      <div class="footer-brand">William Hedén</div>
+      <p class="footer-tagline">Nervsystemsbaserad terapi i Gnesta. Skonsamma metoder för kropp och nervsystem.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Kontakt</div>
+      <a href="mailto:pwheden@gmail.com">pwheden@gmail.com</a>
+      <a href="tel:+46727177234">072 717 72 34</a>
+      <p>Lydias Väg 6, 646 93 Gnesta</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Bokning</div>
+      <a href="#contact" class="footer-book-btn">Boka tid här</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 William Hedén. Alla rättigheter förbehållna.</p>
+    <div class="footer-legal-links">
+      <button type="button" data-modal="privacy-modal">Integritetspolicy</button>
+      <button type="button" data-modal="cookie-modal">Cookiepolicy</button>
+    </div>
+  </div>
+</footer>
+
+<!-- Legal popups -->
+<div class="modal-overlay" id="privacy-modal">
+  <div class="modal-box">
+    <button class="modal-close" data-close>&times;</button>
+    <h3>Integritetspolicy</h3>
+    <p>William Hedén värnar om din personliga integritet. Denna policy beskriver hur dina personuppgifter samlas in, används och skyddas när du besöker denna webbplats eller bokar en session.</p>
+    <p><strong>Vilka uppgifter samlas in:</strong> Namn, e-postadress och telefonnummer som du själv lämnar vid kontakt eller bokning.</p>
+    <p><strong>Hur uppgifterna används:</strong> Uppgifterna används enbart för att administrera bokningar, svara på förfrågningar och vid behov föra journalanteckningar kopplade till din behandling.</p>
+    <p><strong>Lagring:</strong> Uppgifter lagras inte längre än nödvändigt och delas aldrig med tredje part utan ditt samtycke.</p>
+    <p><strong>Dina rättigheter:</strong> Du har rätt att begära utdrag, rättelse eller radering av dina uppgifter. Kontakta pwheden@gmail.com för frågor om dina personuppgifter.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="cookie-modal">
+  <div class="modal-box">
+    <button class="modal-close" data-close>&times;</button>
+    <h3>Cookiepolicy</h3>
+    <p>Denna webbplats använder enbart nödvändiga tekniska funktioner för att fungera korrekt, exempelvis för att visa en karta från Google Maps.</p>
+    <p>Inga cookies för marknadsföring, spårning eller analys används på denna sida.</p>
+    <p>Om du har frågor om hur webbplatsen hanterar din information, kontakta pwheden@gmail.com.</p>
+  </div>
+</div>
+
+<!-- ─── JS ─────────────────────────────────────────────────────── -->
+<script>
+  const nav = document.getElementById('site-nav');
+  let lastScrollY = window.scrollY;
+
+  function updateNav() {
+    const y = window.scrollY;
+
+    // Transparent on the hero, tinted background once scrolled past it.
+    nav.classList.toggle('scrolled', y > 40);
+
+    // Hide on scroll down, show on scroll up.
+    if (y > lastScrollY && y > nav.offsetHeight) {
+      nav.classList.add('nav-hidden');
+    } else {
+      nav.classList.remove('nav-hidden');
+    }
+    lastScrollY = y;
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  // Legal popups
+  document.querySelectorAll('[data-modal]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById(btn.dataset.modal).classList.add('open');
+    });
+  });
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay || e.target.hasAttribute('data-close')) {
+        overlay.classList.remove('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Original camera files (web-optimized copies live in assets/)
+/*.JPG
+/*.jpg
+/*.HEIC
+/*.MOV
+
+# Unrelated poster project
+/create_poster.py
+/create_poster_pptx.py
+/fjallvandra_poster.pdf
+
+# Local Claude settings
+.claude/settings.local.json
