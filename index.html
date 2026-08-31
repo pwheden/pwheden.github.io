@@ -474,6 +474,138 @@
     }
     .for-whom-item p { color: rgba(255,255,255,0.88); font-size: 0.95rem; font-weight: 300; }
 
+    /* ─── EVENTS ───────────────────────────────────────────────── */
+    #events { background: var(--cream-dark); }
+    .events-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .events-arrows { display: flex; gap: 0.6rem; flex-shrink: 0; padding-bottom: 0.5rem; }
+    .events-arrow {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--sage-light);
+      background: var(--white);
+      color: var(--sage-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s, opacity 0.2s;
+    }
+    .events-arrow svg { width: 18px; height: 18px; }
+    .events-arrow:hover:not(:disabled) { background: var(--sage-dark); color: var(--white); }
+    .events-arrow:disabled { opacity: 0.35; cursor: default; }
+
+    .events-track {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 0.5rem;
+    }
+    .events-track::-webkit-scrollbar { display: none; }
+
+    .event-card {
+      flex: 0 0 min(100%, 480px);
+      scroll-snap-align: start;
+      background: var(--white);
+      border-radius: 1.5rem;
+      padding: 2.25rem 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 2.25rem; right: 2.25rem;
+      height: 2px;
+      background: var(--terra);
+    }
+    .event-city {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--terra);
+      background: var(--cream);
+      border-radius: 999px;
+      padding: 0.3rem 0.85rem;
+      margin-bottom: 1.1rem;
+    }
+    .event-card h3 {
+      font-size: 1.35rem;
+      color: var(--sage-dark);
+      margin-bottom: 0.85rem;
+      line-height: 1.35;
+    }
+    .event-card > p {
+      color: var(--muted);
+      font-weight: 300;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--cream-dark);
+      margin-top: auto;
+    }
+    .event-meta-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      color: var(--sage-dark);
+      font-weight: 500;
+    }
+    .event-meta-item svg { width: 17px; height: 17px; flex-shrink: 0; margin-top: 0.2rem; }
+    .event-meta-item span { font-weight: 300; color: var(--muted); }
+    .event-meta-item strong { font-weight: 500; }
+    .event-dates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+    .event-dates-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-top: 0.9rem;
+    }
+    .event-date-chip {
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: var(--sage-dark);
+      background: var(--cream);
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      white-space: nowrap;
+    }
+    .event-book {
+      margin-top: 1.5rem;
+      align-self: flex-start;
+    }
+    @media (max-width: 700px) {
+      .events-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .event-card { flex-basis: 88%; }
+    }
+
     /* ─── ABOUT ────────────────────────────────────────────────── */
     #about { background: var(--white); }
     .about-grid {
@@ -564,7 +696,7 @@
       margin: 0 auto;
       padding: 4.5rem 2rem 3rem;
       display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
+      grid-template-columns: 1.2fr 1fr 0.8fr 1.4fr;
       gap: 3rem;
     }
     .footer-brand {
@@ -625,6 +757,68 @@
     }
     .footer-legal-links button:hover { color: var(--white); }
 
+    /* newsletter signup */
+    .newsletter-text { font-weight: 300; margin-bottom: 1rem; }
+    .newsletter-row { display: flex; gap: 0.5rem; }
+    .newsletter-row input[type="email"] {
+      flex: 1;
+      min-width: 0;
+      padding: 0.65rem 0.9rem;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+    }
+    .newsletter-row input[type="email"]::placeholder { color: rgba(255,255,255,0.35); }
+    .newsletter-row input[type="email"]:focus {
+      outline: none;
+      border-color: var(--terra);
+    }
+    .newsletter-btn {
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+    .newsletter-consent {
+      display: flex;
+      gap: 0.55rem;
+      align-items: flex-start;
+      margin-top: 0.85rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .newsletter-consent input[type="checkbox"] {
+      accent-color: var(--terra);
+      margin-top: 0.2rem;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .newsletter-consent label { cursor: pointer; margin: 0; display: inline; }
+    .consent-link {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      color: rgba(255,255,255,0.4);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .consent-link:hover { color: var(--white); }
+    .newsletter-status {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 300;
+      display: none;
+    }
+    .newsletter-status.ok { display: block; color: #a8c69a; }
+    .newsletter-status.error { display: block; color: var(--terra-light); }
+
     /* legal modal */
     .modal-overlay {
       position: fixed;
@@ -660,6 +854,9 @@
     }
     .modal-close:hover { color: var(--terra); }
 
+    @media (max-width: 1000px) {
+      .footer-main { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 700px) {
       .footer-main { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; text-align: center; }
@@ -920,6 +1117,28 @@
   </div>
 </section>
 
+<!-- ─── EVENTS ──────────────────────────────────────────────────── -->
+<section id="events">
+  <div class="section-inner">
+    <div class="events-header">
+      <div>
+        <span class="section-label">Evenemang</span>
+        <h2 class="section-title" style="margin-bottom:0.75rem;">Kommande evenemang</h2>
+        <p class="section-lead" style="margin-bottom:0;">Gruppkvällar där du får uppleva metoderna i ett mindre sammanhang. Kom som du är – och gå hem lättare.</p>
+      </div>
+      <div class="events-arrows">
+        <button class="events-arrow" id="events-prev" aria-label="Föregående evenemang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="events-arrow" id="events-next" aria-label="Nästa evenemang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="events-track" id="events-track"></div>
+  </div>
+</section>
+
 <!-- ─── ABOUT ───────────────────────────────────────────────────── -->
 <section id="about">
   <div class="section-inner">
@@ -987,6 +1206,21 @@
       <div class="footer-heading">Bokning</div>
       <a href="https://www.bokadirekt.se/places/william-heden-nervsystemsbaserad-terapi-137454" target="_blank" rel="noopener" class="footer-book-btn">Boka session</a>
     </div>
+    <div class="footer-col">
+      <div class="footer-heading">Nyhetsbrev</div>
+      <p class="newsletter-text">Få nyheter om kvällar, kurser och lediga tider – några gånger per år.</p>
+      <form id="newsletter-form" novalidate>
+        <div class="newsletter-row">
+          <input type="email" id="newsletter-email" name="email" placeholder="Din e-postadress" autocomplete="email" required>
+          <button type="submit" class="footer-book-btn newsletter-btn">Prenumerera</button>
+        </div>
+        <div class="newsletter-consent">
+          <input type="checkbox" id="newsletter-consent">
+          <span><label for="newsletter-consent">Jag samtycker till att min e-postadress sparas för utskick av nyhetsbrev.</label> <button type="button" class="consent-link" data-modal="privacy-modal">Integritetspolicy</button></span>
+        </div>
+        <p class="newsletter-status" id="newsletter-status" role="status"></p>
+      </form>
+    </div>
   </div>
   <div class="footer-bottom">
     <p>&copy; 2025 William Hedén. Alla rättigheter förbehållna.</p>
@@ -1005,6 +1239,7 @@
     <p>William Hedén värnar om din personliga integritet. Denna policy beskriver hur dina personuppgifter samlas in, används och skyddas när du besöker denna webbplats eller bokar en session.</p>
     <p><strong>Vilka uppgifter samlas in:</strong> Namn, e-postadress och telefonnummer som du själv lämnar vid kontakt eller bokning.</p>
     <p><strong>Hur uppgifterna används:</strong> Uppgifterna används enbart för att administrera bokningar, svara på förfrågningar och vid behov föra journalanteckningar kopplade till din behandling.</p>
+    <p><strong>Nyhetsbrev:</strong> Om du anmäler dig till nyhetsbrevet sparas din e-postadress och används enbart för att skicka nyhetsbrev. Du kan när som helst avanmäla dig genom att mejla pwheden@gmail.com, så raderas din adress.</p>
     <p><strong>Lagring:</strong> Uppgifter lagras inte längre än nödvändigt och delas aldrig med tredje part utan ditt samtycke.</p>
     <p><strong>Dina rättigheter:</strong> Du har rätt att begära utdrag, rättelse eller radering av dina uppgifter. Kontakta pwheden@gmail.com för frågor om dina personuppgifter.</p>
   </div>
@@ -1042,6 +1277,161 @@
 
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
+
+  // ─── Events carousel ──────────────────────────────────────────
+  // Add/remove events here. Dates in ISO format (YYYY-MM-DD); past
+  // dates are filtered out automatically and the card hides itself
+  // when all its dates have passed.
+  const eventsData = [
+    {
+      city: 'Gnesta',
+      title: 'Kvällar för nervsystemsreglering i Gnesta',
+      desc: 'En timme skonsam rörelse med Feldenkrais®-rörelsesession + en timme djup, stödjande beröring med Transforming Touch®. Skonsamma, kroppsbaserade metoder som hjälper ditt nervsystem att landa.',
+      dates: ['2026-09-02','2026-09-16','2026-09-22','2026-09-29','2026-10-06','2026-10-13','2026-10-27','2026-11-03','2026-11-10','2026-11-17','2026-11-24','2026-12-01','2026-12-08','2026-12-15'],
+      time: '17:30–19:30',
+      place: 'Bubblan',
+      address: 'Industrigatan 7, Gnesta',
+      link: 'https://www.bokadirekt.se/places/william-heden-nervsystemsbaserad-terapi-137454'
+    },
+    {
+      city: 'Järna',
+      title: 'Prova-på-kväll för nervsystemet i Järna',
+      desc: 'En timme skonsam rörelse med Feldenkrais®-rörelsesession + en timme djup, stödjande beröring med Transforming Touch®. Skonsamma, kroppsbaserade metoder som hjälper ditt nervsystem att landa.',
+      dates: ['2026-09-15'],
+      time: '17:30–19:30',
+      place: 'Ateljé Light Hub',
+      address: 'Rudolf Steinerseminariet 3, Järna',
+      link: 'https://www.bokadirekt.se/places/william-heden-nervsystemsbaserad-terapi-137454'
+    }
+  ];
+
+  (function renderEvents() {
+    const track = document.getElementById('events-track');
+    const section = document.getElementById('events');
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const fmt = (iso, opts) =>
+      new Date(iso + 'T00:00:00').toLocaleDateString('sv-SE', opts);
+
+    const cards = eventsData
+      .map(ev => ({ ...ev, upcoming: ev.dates.filter(d => new Date(d + 'T00:00:00') >= today).sort() }))
+      .filter(ev => ev.upcoming.length > 0);
+
+    if (cards.length === 0) {
+      section.style.display = 'none';
+      return;
+    }
+
+    track.innerHTML = cards.map(ev => {
+      const next = ev.upcoming[0];
+      const rest = ev.upcoming.slice(1);
+      const nextLabel = fmt(next, { weekday: 'long', day: 'numeric', month: 'long' });
+      const chips = rest.map(d =>
+        `<span class="event-date-chip">${fmt(d, { weekday: 'short', day: 'numeric', month: 'short' }).replace('.', '')}</span>`
+      ).join('');
+      return `
+      <article class="event-card">
+        <span class="event-city">${ev.city}</span>
+        <h3>${ev.title}</h3>
+        <p>${ev.desc}</p>
+        <div class="event-meta">
+          <div class="event-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <div><strong>${rest.length > 0 ? 'Nästa tillfälle: ' : ''}${nextLabel}</strong> <span>· kl ${ev.time}</span></div>
+          </div>
+          <div class="event-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><strong>${ev.place}</strong> <span>· ${ev.address}</span></div>
+          </div>
+          ${rest.length > 0 ? `
+          <div>
+            <div class="event-dates-label">Fler tillfällen</div>
+            <div class="event-dates">${chips}</div>
+          </div>` : ''}
+        </div>
+        <a href="${ev.link}" target="_blank" rel="noopener" class="btn-primary event-book">Boka</a>
+      </article>`;
+    }).join('');
+
+    // Arrow navigation
+    const prevBtn = document.getElementById('events-prev');
+    const nextBtn = document.getElementById('events-next');
+    const step = () => {
+      const card = track.querySelector('.event-card');
+      return card ? card.offsetWidth + 24 : 400;
+    };
+    prevBtn.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    nextBtn.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+
+    const updateArrows = () => {
+      const scrollable = track.scrollWidth > track.clientWidth + 5;
+      prevBtn.parentElement.style.display = scrollable ? 'flex' : 'none';
+      prevBtn.disabled = track.scrollLeft <= 5;
+      nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 5;
+    };
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    updateArrows();
+  })();
+
+  // ─── Newsletter signup ────────────────────────────────────────
+  // Submissions are stored in a Google Sheet via a Google Apps Script
+  // web app. See newsletter-setup.md for how the endpoint is created.
+  const NEWSLETTER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwCnCwD7bFv8pHE_QN7cgxCycswDUbUu2j5cLf-aHCyCjGTqvecrB02-KlFUw1tYKBo/exec';
+
+  (function initNewsletter() {
+    const form = document.getElementById('newsletter-form');
+    const emailInput = document.getElementById('newsletter-email');
+    const consent = document.getElementById('newsletter-consent');
+    const status = document.getElementById('newsletter-status');
+    const btn = form.querySelector('button[type="submit"]');
+
+    const show = (msg, cls) => {
+      status.textContent = msg;
+      status.className = 'newsletter-status ' + cls;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        show('Ange en giltig e-postadress.', 'error');
+        return;
+      }
+      if (!consent.checked) {
+        show('Bocka i samtyckesrutan för att prenumerera.', 'error');
+        return;
+      }
+      if (NEWSLETTER_ENDPOINT.indexOf('https://') !== 0) {
+        show('Anmälan är inte aktiverad ännu. Mejla mig så lägger jag till dig!', 'error');
+        return;
+      }
+
+      btn.disabled = true;
+      show('Skickar…', 'ok');
+      try {
+        const res = await fetch(NEWSLETTER_ENDPOINT, {
+          method: 'POST',
+          body: new URLSearchParams({ email }),
+        });
+        const data = await res.json();
+        if (data.result === 'duplicate') {
+          show('Du prenumererar redan – tack!', 'ok');
+        } else if (data.result === 'ok') {
+          show('Tack! Du är nu anmäld till nyhetsbrevet.', 'ok');
+          form.reset();
+        } else {
+          throw new Error(data.result);
+        }
+      } catch (err) {
+        show('Något gick fel. Försök igen, eller mejla mig direkt.', 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  })();
 
   // Legal popups
   document.querySelectorAll('[data-modal]').forEach(btn => {

@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "therapy-site",
+      "name": "site",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-l", "3456", "."],
-      "port": 3456
+      "runtimeArgs": ["-y", "serve", "-l", "8123", "."],
+      "port": 8123
     }
   ]
 }
