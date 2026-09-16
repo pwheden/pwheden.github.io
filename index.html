@@ -472,6 +472,127 @@
     }
     .for-whom-item p { color: rgba(255,255,255,0.88); font-size: 0.95rem; font-weight: 300; }
 
+    /* ─── FOR COMPANIES ────────────────────────── */
+    #for-companies { background: var(--cream); }
+    #for-companies .section-title { max-width: 780px; }
+    #for-companies .section-lead { max-width: 700px; margin-bottom: 3.5rem; }
+
+    .corp-why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.25rem 3rem;
+      margin-bottom: 4.5rem;
+    }
+    @media (max-width: 760px) {
+      .corp-why-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    .corp-why-item { border-top: 1px solid var(--cream-dark); padding-top: 1.25rem; }
+    .corp-why-num {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--terra);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .corp-why-item h4 {
+      font-size: 1.2rem;
+      color: var(--sage-dark);
+      margin-bottom: 0.5rem;
+    }
+    .corp-why-item p { font-size: 0.92rem; color: var(--muted); font-weight: 300; }
+
+    .corp-subhead {
+      font-family: 'Philosopher', serif;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      color: var(--sage-dark);
+      margin-bottom: 0.6rem;
+    }
+    .corp-sub-lead {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 640px;
+      margin-bottom: 2.5rem;
+    }
+
+    .corp-offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .corp-offer-grid { grid-template-columns: 1fr; }
+    }
+    .corp-card {
+      background: var(--white);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: box-shadow 0.25s, transform 0.2s;
+    }
+    .corp-card:hover { box-shadow: 0 10px 36px rgba(0,0,0,0.07); transform: translateY(-3px); }
+    .corp-card h4 {
+      font-family: 'Philosopher', serif;
+      font-size: 1.05rem;
+      color: var(--sage-dark);
+    }
+    .corp-card > p { font-size: 0.875rem; color: var(--muted); font-weight: 300; line-height: 1.65; }
+    .corp-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.25rem;
+    }
+    .corp-card li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.55;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .corp-card li::before { content: '\2013'; position: absolute; left: 0; color: var(--terra); }
+
+    .corp-cta {
+      margin-top: 3.5rem;
+      background: var(--cream-dark);
+      border-radius: 1.25rem;
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .corp-cta h4 {
+      font-family: 'Philosopher', serif;
+      font-size: 1.4rem;
+      color: var(--sage-dark);
+      margin-bottom: 0.45rem;
+    }
+    .corp-cta p { font-size: 0.95rem; color: var(--muted); font-weight: 300; max-width: 560px; }
+    .corp-cta-action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    .corp-cta-mail {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .corp-cta-mail:hover { color: var(--terra); }
+    .corp-cta-mail svg { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.7; }
+
     /* ─── EVENTS ───────────────────────────────────────────────── */
     #events { background: var(--cream-dark); }
     #events .section-title { max-width: none; }
@@ -882,7 +1003,8 @@
       <a href="#" class="nav-logo">William Hedén</a>
       <ul class="nav-links">
         <li><a href="#services">Tjänster</a></li>
-        <li><a href="#concepts">Begrepp</a></li>
+        <li><a href="#events">Kommande</a></li>
+        <li><a href="#for-companies">Företag</a></li>
         <li><a href="#about">Om mig</a></li>
         <li><a href="#contact">Kontakt</a></li>
       </ul>
@@ -1007,6 +1129,28 @@
   </div>
 </section>
 
+<!-- ─── EVENTS ──────────────────────────────────────────────────── -->
+<section id="events">
+  <div class="section-inner">
+    <div class="events-header">
+      <div>
+        <span class="section-label">Evenemang</span>
+        <h2 class="section-title" style="margin-bottom:0.75rem;">Kommande evenemang</h2>
+        <p class="section-lead" style="margin-bottom:0;">Gruppkvällar där du får uppleva metoderna i ett mindre sammanhang. En timme skonsam rörelse med Feldenkrais®-rörelsesession + en timme djup, stödjande beröring med Transforming Touch®.</p>
+      </div>
+      <div class="events-arrows">
+        <button class="events-arrow" id="events-prev" aria-label="Föregående evenemang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="events-arrow" id="events-next" aria-label="Nästa evenemang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="events-track" id="events-track"></div>
+  </div>
+</section>
+
 <!-- ─── CONCEPTS ───────────────────────────────────────────────── -->
 <section id="concepts">
   <div class="section-inner">
@@ -1104,25 +1248,101 @@
   </div>
 </section>
 
-<!-- ─── EVENTS ──────────────────────────────────────────────────── -->
-<section id="events">
+<!-- ─── FOR COMPANIES ───────────────────────── -->
+<section id="for-companies">
   <div class="section-inner">
-    <div class="events-header">
-      <div>
-        <span class="section-label">Evenemang</span>
-        <h2 class="section-title" style="margin-bottom:0.75rem;">Kommande evenemang</h2>
-        <p class="section-lead" style="margin-bottom:0;">Gruppkvällar där du får uppleva metoderna i ett mindre sammanhang. En timme skonsam rörelse med Feldenkrais®-rörelsesession + en timme djup, stödjande beröring med Transforming Touch®.</p>
+    <span class="section-label">För företag</span>
+    <h2 class="section-title">Trygga nervsystem är förutsättningen för allt det andra</h2>
+    <p class="section-lead">Många organisationer investerar i kost, träning och ergonomi. Färre arbetar med det system som avgör hur människor faktiskt mår och fungerar tillsammans: nervsystemet. Jag erbjuder återkommande kroppsbaserat arbete på plats hos er – individuellt och i grupp.</p>
+
+    <div class="corp-why-grid">
+
+      <div class="corp-why-item">
+        <span class="corp-why-num">01</span>
+        <h4>Trygghet kommer före allt annat</h4>
+        <p>Det är först när vi känner oss trygga som vi kan vara öppna – för livet, för varandra och för det vi ännu inte vet. Kreativitet, omdöme, mod att säga det obekväma och passion för arbetet vilar alla på en känsla av trygghet i kroppen.</p>
       </div>
-      <div class="events-arrows">
-        <button class="events-arrow" id="events-prev" aria-label="Föregående evenemang">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <button class="events-arrow" id="events-next" aria-label="Nästa evenemang">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
+
+      <div class="corp-why-item">
+        <span class="corp-why-num">02</span>
+        <h4>Larmberedskap kostar mer än man tror</h4>
+        <p>När kroppen är i beredskapsläge prioriterar den överlevnad, inte nytänkande. Det syns som försiktighet, konflikträdsla, stela samarbeten och en effektivitet som saknar riktning – långt innan någon blir sjukskriven.</p>
+      </div>
+
+      <div class="corp-why-item">
+        <span class="corp-why-num">03</span>
+        <h4>Stress sitter i kroppen</h4>
+        <p>Insikter, policys och goda intentioner når inte alltid dit. Kroppsbaserat arbete går direkt på det som orden inte når – och ger nervsystemet en konkret upplevelse av att det går att landa.</p>
+      </div>
+
+      <div class="corp-why-item">
+        <span class="corp-why-num">04</span>
+        <h4>Återhämtning är en förmåga som går att träna</h4>
+        <p>Reglering är inget man antingen har eller saknar, utan något nervsystemet kan lära sig. Därför ger återkommande arbete över tid betydligt mer än en enstaka insats.</p>
+      </div>
+
+    </div>
+
+    <h3 class="corp-subhead">Uppsättningar som fungerar</h3>
+    <p class="corp-sub-lead">Vi utgår från hur er vardag ser ut. Det vanligaste är att jag finns på plats en återkommande dag – varje vecka eller varannan – så att arbetet blir en del av rytmen och inte ett enskilt event.</p>
+
+    <div class="corp-offer-grid">
+
+      <div class="corp-card">
+        <div class="concept-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sage-dark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/><circle cx="12" cy="15" r="2"/></svg>
+        </div>
+        <h4>Återkommande dag på plats</h4>
+        <p>Individuella sessioner som medarbetarna bokar själva, i ett lugnt rum hos er. Transforming Touch® eller Feldenkrais® utifrån vad personen behöver.</p>
+        <ul>
+          <li>50 minuter per session, 6–7 personer per dag</li>
+          <li>Fullt påklädd, inget ombyte och ingen förberedelse</li>
+          <li>Ni behöver ett avskilt rum – bänk tar jag med</li>
+        </ul>
+      </div>
+
+      <div class="corp-card">
+        <div class="concept-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5M16.5 14c2.6.3 4.5 2 4.5 4.4"/></svg>
+        </div>
+        <h4>Gruppsession i rörelsemedvetande</h4>
+        <p>Feldenkrais® i grupp – långsamma, enkla rörelser som lär upp nervsystemet inifrån. Många reser sig lättare, mjukare och tydligare i huvudet.</p>
+        <ul>
+          <li>45–60 minuter, upp till ett tjugotal deltagare</li>
+          <li>Kräver bara golvyta och arbetskläder</li>
+          <li>Fungerar väl som återkommande inslag i veckan</li>
+        </ul>
+      </div>
+
+      <div class="corp-card">
+        <div class="concept-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sage-dark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c1.5-3 3-4.5 4.5-4.5S9 9 10.5 12s3 4.5 4.5 4.5S18 15 19.5 12 21 7.5 22 7.5"/><path d="M12 3v2M12 19v2"/></svg>
+        </div>
+        <h4>Föreläsning och workshop</h4>
+        <p>”Nervsystemet på jobbet” – om varför trygghet föregår kreativitet, vad stress gör med en organisation och hur återhämtning faktiskt går till. Med praktiska övningar.</p>
+        <ul>
+          <li>60–90 minuter för hela teamet eller ledningsgruppen</li>
+          <li>Konkret och avdramatiserat, utan floskler</li>
+          <li>Bra ingång innan ett längre upplägg</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="corp-cta">
+      <div>
+        <h4>Låt oss ta ett förutsättningslöst samtal</h4>
+        <p>Jag är utbildad ingenjör och har arbetat många år inom managementkonsulting och snabbväxande bolag – jag känner den miljön inifrån. Upplägg och pris sätter vi utifrån omfattning. Berätta hur det ser ut hos er, så föreslår jag något som passar.</p>
+      </div>
+      <div class="corp-cta-action">
+        <a href="mailto:pwheden@gmail.com?subject=Nervsystemsarbete%20för%20företag" class="btn-primary">Kontakta mig</a>
+        <a href="mailto:pwheden@gmail.com" class="corp-cta-mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          pwheden@gmail.com
+        </a>
       </div>
     </div>
-    <div class="events-track" id="events-track"></div>
+
   </div>
 </section>
 
