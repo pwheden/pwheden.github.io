@@ -441,7 +441,8 @@
     /* Audio teaser (Feldenkrais ATM sample) */
     .audio-teaser {
       margin-top: 2rem;
-      background: var(--white);
+      background: var(--terra);
+      color: var(--white);
       border-radius: 1.5rem;
       padding: 2rem 2.25rem;
       display: grid;
@@ -453,16 +454,16 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background: var(--cream);
+      background: rgba(255,255,255,0.18);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--terra);
+      color: var(--white);
     }
     .audio-teaser-icon svg { width: 28px; height: 28px; }
-    .audio-teaser .section-label { margin-bottom: 0.5rem; }
-    .audio-teaser h3 { font-size: 1.35rem; color: var(--sage-dark); margin-bottom: 0.5rem; }
-    .audio-teaser p { color: var(--muted); font-weight: 300; font-size: 0.95rem; margin-bottom: 1rem; }
+    .audio-teaser .section-label { margin-bottom: 0.5rem; color: rgba(255,255,255,0.8); }
+    .audio-teaser h3 { font-size: 1.35rem; color: var(--white); margin-bottom: 0.5rem; }
+    .audio-teaser p { color: rgba(255,255,255,0.9); font-weight: 300; font-size: 0.95rem; margin-bottom: 1rem; }
     .audio-teaser audio { width: 100%; display: block; }
     @media (max-width: 620px) {
       .audio-teaser { grid-template-columns: 1fr; padding: 1.75rem 1.5rem; gap: 1rem; }
