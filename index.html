@@ -106,7 +106,91 @@
 
     /* CTA – pushed far right; visual style comes from the shared
        button rule next to .btn-primary. */
-    .nav-right { justify-self: end; margin-right: -1rem; }
+    .nav-right {
+      justify-self: end;
+      margin-right: -1rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    /* Language switch (SV / EN) */
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+    }
+    .lang-switch button {
+      background: none;
+      border: none;
+      border-bottom: 1px solid transparent;
+      cursor: pointer;
+      font: inherit;
+      letter-spacing: inherit;
+      color: rgba(255,255,255,0.7);
+      padding: 0.2rem 0.1rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .lang-switch button:hover { color: var(--white); }
+    .lang-switch button.active { color: var(--white); border-bottom-color: currentColor; }
+    #site-nav.scrolled .lang-switch,
+    #site-nav.menu-open .lang-switch { color: var(--sage-light); }
+    #site-nav.scrolled .lang-switch button,
+    #site-nav.menu-open .lang-switch button { color: var(--muted); }
+    #site-nav.scrolled .lang-switch button.active,
+    #site-nav.menu-open .lang-switch button.active { color: var(--sage-dark); }
+
+    /* Hamburger + mobile menu (shown below the desktop breakpoint) */
+    .nav-toggle {
+      display: none;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--white);
+    }
+    .nav-toggle span {
+      position: absolute;
+      left: 9px;
+      right: 9px;
+      height: 1.5px;
+      background: currentColor;
+      transition: transform 0.25s, opacity 0.2s;
+    }
+    .nav-toggle span:nth-child(1) { top: 13px; }
+    .nav-toggle span:nth-child(2) { top: 19.5px; }
+    .nav-toggle span:nth-child(3) { top: 26px; }
+    #site-nav.menu-open .nav-toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    #site-nav.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    #site-nav.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    #site-nav.scrolled .nav-toggle,
+    #site-nav.menu-open .nav-toggle { color: var(--sage-dark); }
+    #site-nav.menu-open {
+      background: var(--white);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+    #site-nav.menu-open .nav-logo { color: var(--sage-dark); }
+
+    .mobile-menu { display: none; }
+    .mobile-menu ul { list-style: none; }
+    .mobile-menu li a {
+      display: block;
+      padding: 0.95rem 0;
+      border-bottom: 1px solid var(--cream-dark);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+    .mobile-menu .nav-cta { margin-top: 1.5rem; width: 100%; }
 
     /* ─── HERO ─────────────────────────────────────────────────── */
     #hero {
@@ -373,6 +457,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
     }
     .method-meta-item {
       display: flex;
@@ -383,6 +468,49 @@
       color: var(--sage-dark);
     }
     .method-meta-item svg { width: 17px; height: 17px; flex-shrink: 0; }
+    .method-online {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      margin: -1rem 0 1.5rem;
+      padding: 0.85rem 1rem;
+      background: var(--cream);
+      border-radius: 0.75rem;
+      font-size: 0.88rem;
+      color: var(--sage-dark);
+      line-height: 1.55;
+    }
+    .method-online svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 0.1rem; color: var(--terra); }
+
+    /* Audio teaser (Feldenkrais ATM sample) */
+    .audio-teaser {
+      margin-top: 2rem;
+      background: var(--white);
+      border-radius: 1.5rem;
+      padding: 2rem 2.25rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.75rem;
+      align-items: center;
+    }
+    .audio-teaser-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--terra);
+    }
+    .audio-teaser-icon svg { width: 28px; height: 28px; }
+    .audio-teaser .section-label { margin-bottom: 0.5rem; }
+    .audio-teaser h3 { font-size: 1.35rem; color: var(--sage-dark); margin-bottom: 0.5rem; }
+    .audio-teaser p { color: var(--muted); font-weight: 300; font-size: 0.95rem; margin-bottom: 1rem; }
+    .audio-teaser audio { width: 100%; display: block; }
+    @media (max-width: 620px) {
+      .audio-teaser { grid-template-columns: 1fr; padding: 1.75rem 1.5rem; gap: 1rem; }
+    }
 
     /* ─── CONCEPTS ─────────────────────────────────────────────── */
     #concepts { background: var(--sage-light); }
@@ -978,13 +1106,42 @@
       .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-grid { grid-template-columns: 1fr; }
       .about-photo { aspect-ratio: 4/3; }
-      .nav-links { gap: 1.5rem; }
-      .nav-links li:nth-child(1),
-      .nav-links li:nth-child(2) { display: none; }
     }
-    @media (max-width: 620px) {
+    /* Below this width the centre links no longer fit – switch to
+       the hamburger menu. */
+    @media (max-width: 1100px) {
       .nav-links { display: none; }
       .nav-inner { grid-template-columns: 1fr auto; }
+      .nav-toggle { display: block; }
+      .mobile-menu {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        box-shadow: 0 14px 24px rgba(0,0,0,0.08);
+        padding: 0.25rem 1.5rem 1.75rem;
+        max-height: calc(100vh - 76px);
+        overflow-y: auto;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.25s, transform 0.25s, visibility 0s 0.25s;
+      }
+      #site-nav.menu-open .mobile-menu {
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.25s, transform 0.25s;
+      }
+    }
+    @media (max-width: 620px) {
+      .nav-inner { padding: 0 1.25rem; height: 64px; }
+      .nav-logo { margin-left: 0; font-size: 1.25rem; }
+      .nav-right { margin-right: -0.5rem; gap: 0.75rem; }
+      .nav-right > .nav-cta { display: none; }
+      .mobile-menu { max-height: calc(100vh - 64px); }
     }
   </style>
 </head>
@@ -1009,8 +1166,26 @@
         <li><a href="#contact">Kontakt</a></li>
       </ul>
       <div class="nav-right">
+        <div class="lang-switch" role="group" aria-label="Språk">
+          <button type="button" data-lang="sv" lang="sv">SV</button>
+          <span aria-hidden="true">/</span>
+          <button type="button" data-lang="en" lang="en">EN</button>
+        </div>
         <a href="https://www.bokadirekt.se/places/william-heden-nervsystemsbaserad-terapi-137454" target="_blank" rel="noopener" class="nav-cta">Boka session</a>
+        <button type="button" class="nav-toggle" aria-label="Meny" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <ul>
+        <li><a href="#services">Tjänster</a></li>
+        <li><a href="#events">Kommande</a></li>
+        <li><a href="#for-companies">Företag</a></li>
+        <li><a href="#about">Om mig</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+      </ul>
+      <a href="https://www.bokadirekt.se/places/william-heden-nervsystemsbaserad-terapi-137454" target="_blank" rel="noopener" class="nav-cta">Boka session</a>
     </div>
   </nav>
 
@@ -1018,7 +1193,7 @@
   <div class="hero-content">
     <h1 class="hero-title">Skonsamma, kroppsbaserade metoder som hjälper ditt nervsystem att landa</h1>
     <p class="hero-sub">Så att du kan möta livet med större frihet och ro.</p>
-    <span class="hero-eyebrow">Nervsystemsbaserad terapi · Gnesta</span>
+    <span class="hero-eyebrow">Nervsystemsbaserad terapi · Järna</span>
   </div>
 
 </section>
@@ -1055,6 +1230,10 @@
               <p>Stress, trauma, anknytning och svårighet att landa</p>
             </li>
           </ul>
+          <div class="method-online">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <span><strong>Finns även online.</strong> Du ligger bekvämt hemma och jag guidar dig via videosamtal.</span>
+          </div>
           <div class="method-meta">
             <div class="method-meta-row">
               <div class="method-meta-item">
@@ -1125,6 +1304,20 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- Audio teaser: drop the recording at assets/audio/feldenkrais-atm.mp3.
+         The block hides itself if the file is missing. -->
+    <div class="audio-teaser" id="media">
+      <div class="audio-teaser-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      </div>
+      <div>
+        <span class="section-label">Lyssna</span>
+        <h3>Prova en Feldenkrais®-lektion hemma</h3>
+        <p>En liveinspelning av en ATM-lektion – Medvetenhet genom rörelse. Lägg dig bekvämt på golvet, ta det långsamt och följ med i din egen takt.</p>
+        <audio controls preload="metadata" src="assets/audio/feldenkrais-atm.mp3"></audio>
+      </div>
     </div>
   </div>
 </section>
@@ -1390,7 +1583,7 @@
       </a>
       <span class="video-cta-contact">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Lydias Väg 6, Gnesta
+        Övre Ogan 2, Järna
       </span>
     </div>
   </div>
@@ -1401,13 +1594,13 @@
   <div class="footer-main">
     <div class="footer-col">
       <div class="footer-brand">William Hedén</div>
-      <p class="footer-tagline">Nervsystemsbaserad terapi i Gnesta. Skonsamma metoder för kropp och nervsystem.</p>
+      <p class="footer-tagline">Nervsystemsbaserad terapi i Järna. Skonsamma metoder för kropp och nervsystem.</p>
     </div>
     <div class="footer-col">
       <div class="footer-heading">Kontakt</div>
       <a href="mailto:pwheden@gmail.com">pwheden@gmail.com</a>
       <a href="tel:+46727177234">072 717 72 34</a>
-      <p>Lydias Väg 6, 646 93 Gnesta</p>
+      <p>Övre Ogan 2, 153 95 Järna</p>
     </div>
     <div class="footer-col">
       <div class="footer-heading">Bokning</div>
@@ -1474,7 +1667,7 @@
     nav.classList.toggle('scrolled', y > 40);
 
     // Hide on scroll down, show on scroll up.
-    if (y > lastScrollY && y > nav.offsetHeight) {
+    if (y > lastScrollY && y > nav.offsetHeight && !nav.classList.contains('menu-open')) {
       nav.classList.add('nav-hidden');
     } else {
       nav.classList.remove('nav-hidden');
@@ -1485,10 +1678,290 @@
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
 
+  // ─── Mobile menu ──────────────────────────────────────────────
+  const navToggle = nav.querySelector('.nav-toggle');
+  const setMenu = (open) => {
+    nav.classList.toggle('menu-open', open);
+    navToggle.setAttribute('aria-expanded', open);
+  };
+  navToggle.addEventListener('click', () => setMenu(!nav.classList.contains('menu-open')));
+  document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 1100) setMenu(false); });
+
+  // ─── Translations ─────────────────────────────────────────────
+  // The page is written in Swedish. Every Swedish text snippet (text
+  // node or alt/placeholder/aria-label attribute) is looked up here by
+  // its exact text, with whitespace collapsed. When you change Swedish
+  // text on the page, update its key here too – anything missing stays
+  // in Swedish and is listed in the browser console in English mode.
+  const EN = {
+    // Meta & nav
+    'William Hedén – Nervsystemsbaserad terapi': 'William Hedén – Nervous system based therapy',
+    'Språk': 'Language',
+    'Meny': 'Menu',
+    'Tjänster': 'Services',
+    'Kommande': 'Upcoming',
+    'Företag': 'Business',
+    'Om mig': 'About',
+    'Kontakt': 'Contact',
+    'Boka session': 'Book a session',
+
+    // Hero
+    'Skonsamma, kroppsbaserade metoder som hjälper ditt nervsystem att landa': 'Gentle, body-based methods that help your nervous system settle',
+    'Så att du kan möta livet med större frihet och ro.': 'So you can meet life with greater freedom and ease.',
+    'Nervsystemsbaserad terapi · Järna': 'Nervous system based therapy · Järna',
+
+    // Services
+    'Kroppen bär det som orden inte når': 'The body holds what words cannot reach',
+    'Många av oss bär på långvarig stress, spänning eller en känsla av att aldrig riktigt landa – utan att förstå varför. Ofta handlar det om att nervsystemet fastnat i gamla mönster, något som varken viljan eller tankekraften ensam kan förändra.':
+      'Many of us carry long-term stress, tension or a sense of never quite settling – without understanding why. Often the nervous system has become stuck in old patterns, something neither willpower nor thinking alone can change.',
+    'Jag arbetar med två skonsamma, kroppsbaserade metoder som båda utgår från nervsystemets naturliga förmåga att lära sig och förändras. De kompletterar varandra väl och kan kombineras utifrån dina behov och önskemål.':
+      'I work with two gentle, body-based methods, both grounded in the nervous system’s natural ability to learn and change. They complement each other well and can be combined according to your needs and wishes.',
+    'Du behöver inte göra något speciellt eller prestera. Vi börjar där du är och du är alltid fullt påklädd. I en Transforming Touch®-session ligger du bekvämt medan jag erbjuder lätt beröring. I Feldenkrais® utforskar vi enkla rörelser tillsammans i din egen takt. Det viktigaste är att du känner dig trygg.':
+      'You don’t need to do anything special or perform. We start where you are, and you always stay fully clothed. In a Transforming Touch® session you lie comfortably while I offer light touch. In Feldenkrais® we explore simple movements together at your own pace. What matters most is that you feel safe.',
+    'Transforming Touch – lätt beröring': 'Transforming Touch – light touch',
+    'Nervsystemsreglering med Transforming Touch®': 'Nervous system regulation with Transforming Touch®',
+    'En skonsam, regleringsfokuserad beröringsterapi som ger nervsystemet direkt tillgång till trygghet via kroppen. Utvecklad av Dr. Stephen Terrell för att möta stress, oro och mönster som formats tidigt i livet och som samtalet sällan når.':
+      'A gentle, regulation-focused touch therapy that gives the nervous system direct access to safety through the body. Developed by Dr. Stephen Terrell to meet stress, anxiety and patterns formed early in life that talking rarely reaches.',
+    'Du vilar fullt påklädd på en behandlingsbänk medan jag erbjuder lätt, stilla beröring. Nervsystemet får ta emot ett tryggt stöd – och lär sig, session för session, att landa.':
+      'You rest fully clothed on a treatment table while I offer light, still touch. Your nervous system receives safe support – and learns, session by session, to settle.',
+    'Jag håller lätt och stilla på punkter på kroppen': 'I hold specific points on the body, lightly and still',
+    'Bidrar till': 'Supports',
+    'Nervsystemsreglering, trygghet och ro': 'Nervous system regulation, safety and calm',
+    'Passar särskilt vid': 'Especially helpful for',
+    'Stress, trauma, anknytning och svårighet att landa': 'Stress, trauma, attachment and difficulty settling',
+    'Finns även online.': 'Also available online.',
+    'Du ligger bekvämt hemma och jag guidar dig via videosamtal.': 'You lie comfortably at home while I guide you over video call.',
+    '50 minuter': '50 minutes',
+    '75 minuter': '75 minutes',
+    '1 000 kr inkl. moms': 'SEK 1,000 incl. VAT',
+    '1 400 kr inkl. moms': 'SEK 1,400 incl. VAT',
+    'Rörelsemedvetande med Feldenkrais®': 'Movement awareness with Feldenkrais®',
+    'En utforskande rörelsepedagogik som lär upp nervsystemet inifrån genom långsamma rörelser och varsam uppmärksamhet. Istället för att rätta eller anstränga får hjärnan ny information, och gamla spännings- och rörelsemönster kan släppa.':
+      'An exploratory approach to movement learning that retrains the nervous system from within through slow movements and gentle attention. Instead of correcting or straining, the brain receives new information, and old patterns of tension and movement can release.',
+    'Du ligger fullt påklädd på en behandlingsbänk medan jag varsamt rör och guidar kroppen i din takt. Många reser sig med en omedelbar känsla av lätthet – längre, mjukare, friare.':
+      'You lie fully clothed on a treatment table while I gently move and guide your body at your pace. Many people get up with an immediate sense of lightness – taller, softer, freer.',
+    'Jag gör olika utforskanden och rörelser av kroppen': 'I guide the body through gentle explorations and movements',
+    'Nervsystemsreglering, kroppskännedom och lätthet': 'Nervous system regulation, body awareness and ease',
+    'Smärta, stelhet och önskan att röra sig friare': 'Pain, stiffness and wanting to move more freely',
+    'Lyssna': 'Listen',
+    'Prova en Feldenkrais®-lektion hemma': 'Try a Feldenkrais® lesson at home',
+    'En liveinspelning av en ATM-lektion – Medvetenhet genom rörelse. Lägg dig bekvämt på golvet, ta det långsamt och följ med i din egen takt.':
+      'A live recording of an Awareness Through Movement® lesson (ATM). Lie down comfortably on the floor, take it slowly and follow along at your own pace.',
+
+    // Events
+    'Evenemang': 'Events',
+    'Kommande evenemang': 'Upcoming events',
+    'Gruppkvällar där du får uppleva metoderna i ett mindre sammanhang. En timme skonsam rörelse med Feldenkrais®-rörelsesession + en timme djup, stödjande beröring med Transforming Touch®.':
+      'Group evenings where you can experience the methods in a small setting. One hour of gentle Feldenkrais® movement + one hour of deep, supportive Transforming Touch®.',
+    'Föregående evenemang': 'Previous event',
+    'Nästa evenemang': 'Next event',
+    'Kvällar för nervsystemsreglering i Gnesta': 'Nervous system regulation evenings in Gnesta',
+    'Prova-på-kväll för nervsystemet i Järna': 'Taster evening for the nervous system in Järna',
+    'kl': 'at',
+    'Fler tillfällen': 'More dates',
+    'Boka': 'Book',
+
+    // Concepts
+    'Grundläggande begrepp': 'Key concepts',
+    'Ord du kanske möter': 'Words you might come across',
+    'Kortfattade förklaringar av centrala begrepp som hjälper dig förstå det vi arbetar med.': 'Short explanations of key concepts to help you understand what we work with.',
+    'Hjärnans plasticitet': 'Neuroplasticity',
+    'Hjärnan förändras hela livet. Varje gång vi upplever något nytt – en rörelse, en känsla av trygghet, ett ögonblick av ro – skapas nya kopplingar. Det är detta som gör förändring möjlig, oavsett ålder.':
+      'The brain keeps changing throughout life. Every time we experience something new – a movement, a feeling of safety, a moment of calm – new connections form. This is what makes change possible, at any age.',
+    'Anknytningstrauma': 'Attachment trauma',
+    'Uppstår när vi som barn inte fick tillräckligt konsekvent trygghet, närvaro eller omsorg. Det behöver inte handla om dramatiska händelser – frånvaro räcker. Nervsystemet lär sig tidigt att världen är osäker, och det mönstret bär vi ofta med oss in i vuxenlivet.':
+      'Arises when, as children, we didn’t receive consistent enough safety, presence or care. It doesn’t have to involve dramatic events – absence is enough. The nervous system learns early that the world is unsafe, and we often carry that pattern into adult life.',
+    'Nervsystemsreglering': 'Nervous system regulation',
+    'Nervsystemet styr hur vi svarar på stress, kontakt och vila. När det är reglerat känner vi oss trygga, närvarande och kapabla. Reglering betyder inte att aldrig bli påverkad, utan att kunna återhämta sig.':
+      'The nervous system governs how we respond to stress, connection and rest. When it is regulated we feel safe, present and capable. Regulation doesn’t mean never being affected – it means being able to recover.',
+    'Somatisk terapi': 'Somatic therapy',
+    'Somatisk betyder kroppsbaserad. Somatiska metoder utgår från att kroppen bär på upplevelser och mönster som inte alltid nås genom samtal eller tanke. Genom rörelse, beröring och närvaro skapar vi tillgång till dessa lager – och möjlighet till förändring.':
+      'Somatic means body-based. Somatic methods start from the understanding that the body holds experiences and patterns that can’t always be reached through talking or thinking. Through movement, touch and presence we gain access to these layers – and the possibility of change.',
+
+    // For whom
+    'För vem': 'Who it’s for',
+    'Känner du igen dig?': 'Does this sound like you?',
+    'Känner att stress, spänning eller oro sitter i kroppen snarare än går att tänka bort': 'You feel that stress, tension or anxiety sits in the body rather than something you can think away',
+    'Har varit i samtalsterapi men vill komplettera med något kroppsbaserat': 'You’ve been in talk therapy but want to add something body-based',
+    'Återhämtar dig från utmattning, trauma eller långvarig smärta': 'You’re recovering from burnout, trauma or chronic pain',
+    'Vill röra dig och leva med större lätthet i vardagen': 'You want to move and live with greater ease in everyday life',
+    'Söker ett tryggt, respektfullt och icke-dömande sammanhang': 'You’re looking for a safe, respectful and non-judgemental setting',
+    'Vill hitta tillbaka till dig själv – till din egen känsla av trygghet och kapacitet': 'You want to find your way back to yourself – to your own sense of safety and capacity',
+
+    // For companies
+    'För företag': 'For businesses',
+    'Trygga nervsystem är förutsättningen för allt det andra': 'Safe nervous systems are the foundation for everything else',
+    'Många organisationer investerar i kost, träning och ergonomi. Färre arbetar med det system som avgör hur människor faktiskt mår och fungerar tillsammans: nervsystemet. Jag erbjuder återkommande kroppsbaserat arbete på plats hos er – individuellt och i grupp.':
+      'Many organisations invest in nutrition, exercise and ergonomics. Fewer work with the system that determines how people actually feel and function together: the nervous system. I offer recurring body-based work on site at your workplace – individually and in groups.',
+    'Trygghet kommer före allt annat': 'Safety comes before everything else',
+    'Det är först när vi känner oss trygga som vi kan vara öppna – för livet, för varandra och för det vi ännu inte vet. Kreativitet, omdöme, mod att säga det obekväma och passion för arbetet vilar alla på en känsla av trygghet i kroppen.':
+      'Only when we feel safe can we be open – to life, to each other and to what we don’t yet know. Creativity, judgement, the courage to say the uncomfortable thing and passion for the work all rest on a felt sense of safety in the body.',
+    'Larmberedskap kostar mer än man tror': 'Being on high alert costs more than you think',
+    'När kroppen är i beredskapsläge prioriterar den överlevnad, inte nytänkande. Det syns som försiktighet, konflikträdsla, stela samarbeten och en effektivitet som saknar riktning – långt innan någon blir sjukskriven.':
+      'When the body is on alert it prioritises survival, not new thinking. It shows up as caution, conflict avoidance, stiff collaboration and efficiency without direction – long before anyone goes on sick leave.',
+    'Stress sitter i kroppen': 'Stress lives in the body',
+    'Insikter, policys och goda intentioner når inte alltid dit. Kroppsbaserat arbete går direkt på det som orden inte når – och ger nervsystemet en konkret upplevelse av att det går att landa.':
+      'Insights, policies and good intentions don’t always reach that far. Body-based work goes straight to what words can’t reach – and gives the nervous system a concrete experience that it is possible to settle.',
+    'Återhämtning är en förmåga som går att träna': 'Recovery is a skill that can be trained',
+    'Reglering är inget man antingen har eller saknar, utan något nervsystemet kan lära sig. Därför ger återkommande arbete över tid betydligt mer än en enstaka insats.':
+      'Regulation isn’t something you either have or lack – it’s something the nervous system can learn. That’s why recurring work over time gives far more than a one-off effort.',
+    'Uppsättningar som fungerar': 'Formats that work',
+    'Vi utgår från hur er vardag ser ut. Det vanligaste är att jag finns på plats en återkommande dag – varje vecka eller varannan – så att arbetet blir en del av rytmen och inte ett enskilt event.':
+      'We start from what your everyday looks like. Most commonly I’m on site on a recurring day – weekly or every other week – so the work becomes part of the rhythm rather than a one-off event.',
+    'Återkommande dag på plats': 'A recurring day on site',
+    'Individuella sessioner som medarbetarna bokar själva, i ett lugnt rum hos er. Transforming Touch® eller Feldenkrais® utifrån vad personen behöver.':
+      'Individual sessions that employees book themselves, in a quiet room at your workplace. Transforming Touch® or Feldenkrais® depending on what each person needs.',
+    '50 minuter per session, 6–7 personer per dag': '50 minutes per session, 6–7 people per day',
+    'Fullt påklädd, inget ombyte och ingen förberedelse': 'Fully clothed – no changing and no preparation',
+    'Ni behöver ett avskilt rum – bänk tar jag med': 'You provide a private room – I bring the table',
+    'Gruppsession i rörelsemedvetande': 'Group session in movement awareness',
+    'Feldenkrais® i grupp – långsamma, enkla rörelser som lär upp nervsystemet inifrån. Många reser sig lättare, mjukare och tydligare i huvudet.':
+      'Feldenkrais® in a group – slow, simple movements that retrain the nervous system from within. Many people get up lighter, softer and with a clearer head.',
+    '45–60 minuter, upp till ett tjugotal deltagare': '45–60 minutes, up to around twenty participants',
+    'Kräver bara golvyta och arbetskläder': 'Only needs floor space and everyday work clothes',
+    'Fungerar väl som återkommande inslag i veckan': 'Works well as a recurring part of the week',
+    'Föreläsning och workshop': 'Talk and workshop',
+    '”Nervsystemet på jobbet” – om varför trygghet föregår kreativitet, vad stress gör med en organisation och hur återhämtning faktiskt går till. Med praktiska övningar.':
+      '“The nervous system at work” – on why safety comes before creativity, what stress does to an organisation and how recovery actually happens. With practical exercises.',
+    '60–90 minuter för hela teamet eller ledningsgruppen': '60–90 minutes for the whole team or the leadership group',
+    'Konkret och avdramatiserat, utan floskler': 'Concrete and down-to-earth, no buzzwords',
+    'Bra ingång innan ett längre upplägg': 'A good starting point before a longer engagement',
+    'Låt oss ta ett förutsättningslöst samtal': 'Let’s have a no-obligation conversation',
+    'Jag är utbildad ingenjör och har arbetat många år inom managementkonsulting och snabbväxande bolag – jag känner den miljön inifrån. Upplägg och pris sätter vi utifrån omfattning. Berätta hur det ser ut hos er, så föreslår jag något som passar.':
+      'I’m a trained engineer and have worked for many years in management consulting and fast-growing companies – I know that environment from the inside. Format and price depend on scope. Tell me what things look like for you, and I’ll suggest something that fits.',
+    'Kontakta mig': 'Contact me',
+
+    // About
+    'Under flera år levde jag ett liv som såg framgångsrikt ut på utsidan – karriär inom managementkonsulting och snabbväxande bolag, högt tempo och ständig tillgänglighet. Men under ytan bar jag på djup ångest och ett mönster i relationer som jag inte förstod. Tillslut insåg jag att det inte var ett värdigt liv. Det var hösten 2021 som något förändrades.':
+      'For several years I lived a life that looked successful from the outside – a career in management consulting and fast-growing companies, a high pace and constant availability. But beneath the surface I carried deep anxiety and a pattern in relationships that I didn’t understand. Eventually I realised it wasn’t a life worth living that way. In the autumn of 2021 something changed.',
+    'Det som följde var en av de mest omvälvande perioderna i mitt liv. Jag påbörjade terapi med fokus på anknytningstrauma. Mentorer och människor som visade vägen. Och gradvis en hel livsstilsomställning – hur jag jobbar, var jag bor, vilka relationer jag väljer, hur jag tar hand om min kropp. Jag har provat många olika terapiformer och kroppsbaserade metoder: gestaltterapi, Rolfing, Somatic Experiencing, A.R.T., NARM, Feldenkrais och Transforming Touch®. Det är ur den resan det här arbetet vuxit fram.':
+      'What followed was one of the most transformative periods of my life. I began therapy focused on attachment trauma. Mentors and people who showed the way. And gradually a complete change of lifestyle – how I work, where I live, which relationships I choose, how I care for my body. I have tried many forms of therapy and body-based methods: Gestalt therapy, Rolfing, Somatic Experiencing, A.R.T., NARM, Feldenkrais and Transforming Touch®. This work has grown out of that journey.',
+    'Jag möter dig med en uppriktig förståelse för hur det känns att bära på mönster som kroppen ännu inte fått bearbeta – och en genuin övertygelse om att förändring är möjlig. Du behöver inte veta vägen. Det räcker att du är redo att börja.':
+      'I meet you with a sincere understanding of what it feels like to carry patterns the body hasn’t yet been able to process – and a genuine conviction that change is possible. You don’t need to know the way. It’s enough that you’re ready to begin.',
+    'Utbildning': 'Training',
+    'NARM-informerad professionsutbildning (2026)': 'NARM-informed professional training (2026)',
+    'Transforming Touch®-praktikerutbildning med Stephen Terrell (2025–2026)': 'Transforming Touch® practitioner training with Stephen Terrell (2025–2026)',
+    'Feldenkrais®-praktikerutbildning (2023–2027)': 'Feldenkrais® practitioner training (2023–2027)',
+    'Immunity to Change® Facilitator\'s Workshop med Robert Kegan (2022)': 'Immunity to Change® Facilitator\'s Workshop with Robert Kegan (2022)',
+
+    // Contact & footer
+    'Redo att ta ett första steg?': 'Ready to take a first step?',
+    'Hör av dig om du har frågor eller vill boka ett inledande samtal på 20 minuter – utan kostnad och utan förpliktelse.':
+      'Get in touch if you have questions or would like to book a free, no-obligation 20-minute introductory call.',
+    'Nervsystemsbaserad terapi i Järna. Skonsamma metoder för kropp och nervsystem.': 'Nervous system based therapy in Järna. Gentle methods for body and nervous system.',
+    'Bokning': 'Booking',
+    'Nyhetsbrev': 'Newsletter',
+    'Få nyheter om kvällar, kurser och lediga tider – några gånger per år.': 'News about evenings, courses and available times – a few times a year.',
+    'Din e-postadress': 'Your email address',
+    'Prenumerera': 'Subscribe',
+    'Jag samtycker till att min e-postadress sparas för utskick av nyhetsbrev.': 'I agree to my email address being stored for sending the newsletter.',
+    'Integritetspolicy': 'Privacy policy',
+    'Cookiepolicy': 'Cookie policy',
+    '© 2026 William Hedén. Alla rättigheter förbehållna.': '© 2026 William Hedén. All rights reserved.',
+
+    // Newsletter messages
+    'Ange en giltig e-postadress.': 'Please enter a valid email address.',
+    'Bocka i samtyckesrutan för att prenumerera.': 'Please tick the consent box to subscribe.',
+    'Anmälan är inte aktiverad ännu. Mejla mig så lägger jag till dig!': 'Sign-up isn’t active yet. Email me and I’ll add you!',
+    'Skickar…': 'Sending…',
+    'Du prenumererar redan – tack!': 'You’re already subscribed – thank you!',
+    'Tack! Du är nu anmäld till nyhetsbrevet.': 'Thank you! You’re now subscribed to the newsletter.',
+    'Något gick fel. Försök igen, eller mejla mig direkt.': 'Something went wrong. Please try again, or email me directly.',
+
+    // Privacy & cookie policy
+    'William Hedén värnar om din personliga integritet. Denna policy beskriver hur dina personuppgifter samlas in, används och skyddas när du besöker denna webbplats eller bokar en session.':
+      'William Hedén cares about your privacy. This policy describes how your personal data is collected, used and protected when you visit this website or book a session.',
+    'Vilka uppgifter samlas in:': 'What data is collected:',
+    'Namn, e-postadress och telefonnummer som du själv lämnar vid kontakt eller bokning.': 'Name, email address and phone number that you provide when getting in touch or booking.',
+    'Hur uppgifterna används:': 'How the data is used:',
+    'Uppgifterna används enbart för att administrera bokningar, svara på förfrågningar och vid behov föra journalanteckningar kopplade till din behandling.':
+      'The data is used only to manage bookings, reply to enquiries and, where needed, keep session notes related to your treatment.',
+    'Nyhetsbrev:': 'Newsletter:',
+    'Om du anmäler dig till nyhetsbrevet sparas din e-postadress och används enbart för att skicka nyhetsbrev. Du kan när som helst avanmäla dig genom att mejla pwheden@gmail.com, så raderas din adress.':
+      'If you sign up for the newsletter, your email address is stored and used only to send the newsletter. You can unsubscribe at any time by emailing pwheden@gmail.com, and your address will be deleted.',
+    'Lagring:': 'Storage:',
+    'Uppgifter lagras inte längre än nödvändigt och delas aldrig med tredje part utan ditt samtycke.': 'Data is not stored longer than necessary and is never shared with third parties without your consent.',
+    'Dina rättigheter:': 'Your rights:',
+    'Du har rätt att begära utdrag, rättelse eller radering av dina uppgifter. Kontakta pwheden@gmail.com för frågor om dina personuppgifter.':
+      'You have the right to request access to, correction or deletion of your data. Contact pwheden@gmail.com with any questions about your personal data.',
+    'Denna webbplats använder enbart nödvändiga tekniska funktioner för att fungera korrekt, exempelvis för att visa en karta från Google Maps.':
+      'This website only uses the technical functions necessary for it to work properly, for example to display a map from Google Maps.',
+    'Inga cookies för marknadsföring, spårning eller analys används på denna sida.': 'No cookies for marketing, tracking or analytics are used on this site.',
+    'Om du har frågor om hur webbplatsen hanterar din information, kontakta pwheden@gmail.com.': 'If you have questions about how this website handles your information, contact pwheden@gmail.com.',
+  };
+
+  let lang = 'sv';
+  const norm = (s) => s.replace(/\s+/g, ' ').trim();
+  const t = (sv) => (lang === 'en' && EN[sv]) || sv;
+
+  // Remember the original Swedish of every translatable text node and
+  // attribute once, so switching back and forth is lossless.
+  const I18N_ATTRS = ['alt', 'placeholder', 'aria-label'];
+  const i18nTargets = [];
+  (function collectI18nTargets() {
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: (n) => n.parentElement.closest('script, style, #events-track, .lang-switch') || !norm(n.nodeValue)
+        ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+    });
+    while (walker.nextNode()) {
+      const n = walker.currentNode;
+      i18nTargets.push({ node: n, sv: n.nodeValue });
+    }
+    document.querySelectorAll(I18N_ATTRS.map(a => `[${a}]`).join(',')).forEach(el => {
+      I18N_ATTRS.forEach(attr => {
+        if (el.hasAttribute(attr) && norm(el.getAttribute(attr))) {
+          i18nTargets.push({ el, attr, sv: el.getAttribute(attr) });
+        }
+      });
+    });
+  })();
+  const svTitle = document.title;
+
+  function setLang(next) {
+    lang = next === 'en' ? 'en' : 'sv';
+    document.documentElement.lang = lang;
+    document.title = t(svTitle);
+    const missing = new Set();
+    i18nTargets.forEach(target => {
+      const key = norm(target.sv);
+      let value = target.sv;
+      if (lang === 'en') {
+        if (EN[key]) {
+          // Keep the surrounding whitespace of the original text node.
+          value = target.sv.replace(/^(\s*)[\s\S]*?(\s*)$/, (_, a, b) => a + EN[key] + b);
+        } else if (/[a-zåäö]/i.test(key) && !/^(pwheden@gmail\.com|William Hedén|Feldenkrais|Övre Ogan.*)$/.test(key)) {
+          missing.add(key);
+        }
+      }
+      if (target.node) target.node.nodeValue = value;
+      else target.el.setAttribute(target.attr, value);
+    });
+    document.querySelectorAll('.lang-switch button').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+      b.setAttribute('aria-pressed', b.dataset.lang === lang);
+    });
+    renderEvents();
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+    if (missing.size) console.info('Untranslated text (add to EN):', [...missing]);
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(b =>
+    b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  // ─── Audio teaser ─────────────────────────────────────────────
+  // Hide the listening block until a recording has been added.
+  const audioTeaser = document.getElementById('media');
+  const audio = audioTeaser.querySelector('audio');
+  const hideAudio = () => { audioTeaser.style.display = 'none'; };
+  if (audio.error) hideAudio();
+  audio.addEventListener('error', hideAudio);
+
   // ─── Events carousel ──────────────────────────────────────────
   // Add/remove events here. Dates in ISO format (YYYY-MM-DD); past
   // dates are filtered out automatically and the card hides itself
-  // when all its dates have passed.
+  // when all its dates have passed. Add each new title to EN above.
   const eventsData = [
     {
       city: 'Gnesta',
@@ -1510,14 +1983,24 @@
     }
   ];
 
-  (function renderEvents() {
-    const track = document.getElementById('events-track');
+  const eventsTrack = document.getElementById('events-track');
+  const eventsPrev = document.getElementById('events-prev');
+  const eventsNext = document.getElementById('events-next');
+
+  function updateEventArrows() {
+    const scrollable = eventsTrack.scrollWidth > eventsTrack.clientWidth + 5;
+    eventsPrev.parentElement.style.display = scrollable ? 'flex' : 'none';
+    eventsPrev.disabled = eventsTrack.scrollLeft <= 5;
+    eventsNext.disabled = eventsTrack.scrollLeft >= eventsTrack.scrollWidth - eventsTrack.clientWidth - 5;
+  }
+
+  function renderEvents() {
     const section = document.getElementById('events');
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
     const fmt = (iso, opts) =>
-      new Date(iso + 'T00:00:00').toLocaleDateString('sv-SE', opts);
+      new Date(iso + 'T00:00:00').toLocaleDateString(lang === 'en' ? 'en-GB' : 'sv-SE', opts);
 
     const cards = eventsData
       .map(ev => ({ ...ev, upcoming: ev.dates.filter(d => new Date(d + 'T00:00:00') >= today).sort() }))
@@ -1528,7 +2011,7 @@
       return;
     }
 
-    track.innerHTML = cards.map(ev => {
+    eventsTrack.innerHTML = cards.map(ev => {
       const next = ev.upcoming[0];
       const rest = ev.upcoming.slice(1);
       const nextLabel = fmt(next, { weekday: 'long', day: 'numeric', month: 'long' });
@@ -1538,11 +2021,11 @@
       return `
       <article class="event-card">
         <span class="event-city">${ev.city}</span>
-        <h3>${ev.title}</h3>
+        <h3>${t(ev.title)}</h3>
         <div class="event-meta">
           <div class="event-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-            <div><strong>${nextLabel}</strong> <span>· kl ${ev.time}</span></div>
+            <div><strong>${nextLabel}</strong> <span>· ${t('kl')} ${ev.time}</span></div>
           </div>
           <div class="event-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -1550,33 +2033,32 @@
           </div>
           ${rest.length > 0 ? `
           <div>
-            <div class="event-dates-label">Fler tillfällen</div>
+            <div class="event-dates-label">${t('Fler tillfällen')}</div>
             <div class="event-dates">${chips}</div>
           </div>` : ''}
         </div>
-        <a href="${ev.link}" target="_blank" rel="noopener" class="btn-primary event-book">Boka</a>
+        <a href="${ev.link}" target="_blank" rel="noopener" class="btn-primary event-book">${t('Boka')}</a>
       </article>`;
     }).join('');
 
-    // Arrow navigation
-    const prevBtn = document.getElementById('events-prev');
-    const nextBtn = document.getElementById('events-next');
-    const step = () => {
-      const card = track.querySelector('.event-card');
-      return card ? card.offsetWidth + 24 : 400;
-    };
-    prevBtn.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-    nextBtn.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    updateEventArrows();
+  }
 
-    const updateArrows = () => {
-      const scrollable = track.scrollWidth > track.clientWidth + 5;
-      prevBtn.parentElement.style.display = scrollable ? 'flex' : 'none';
-      prevBtn.disabled = track.scrollLeft <= 5;
-      nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 5;
-    };
-    track.addEventListener('scroll', updateArrows, { passive: true });
-    window.addEventListener('resize', updateArrows);
-    updateArrows();
+  const eventStep = () => {
+    const card = eventsTrack.querySelector('.event-card');
+    return card ? card.offsetWidth + 24 : 400;
+  };
+  eventsPrev.addEventListener('click', () => eventsTrack.scrollBy({ left: -eventStep(), behavior: 'smooth' }));
+  eventsNext.addEventListener('click', () => eventsTrack.scrollBy({ left: eventStep(), behavior: 'smooth' }));
+  eventsTrack.addEventListener('scroll', updateEventArrows, { passive: true });
+  window.addEventListener('resize', updateEventArrows);
+
+  // Initial language: ?lang=en in the URL, then the visitor's last
+  // choice, otherwise Swedish.
+  (function initLang() {
+    let initial = new URLSearchParams(location.search).get('lang');
+    if (!initial) { try { initial = localStorage.getItem('lang'); } catch (e) {} }
+    setLang(initial || 'sv');
   })();
 
   // ─── Newsletter signup ────────────────────────────────────────
@@ -1601,20 +2083,20 @@
 
       const email = emailInput.value.trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        show('Ange en giltig e-postadress.', 'error');
+        show(t('Ange en giltig e-postadress.'), 'error');
         return;
       }
       if (!consent.checked) {
-        show('Bocka i samtyckesrutan för att prenumerera.', 'error');
+        show(t('Bocka i samtyckesrutan för att prenumerera.'), 'error');
         return;
       }
       if (NEWSLETTER_ENDPOINT.indexOf('https://') !== 0) {
-        show('Anmälan är inte aktiverad ännu. Mejla mig så lägger jag till dig!', 'error');
+        show(t('Anmälan är inte aktiverad ännu. Mejla mig så lägger jag till dig!'), 'error');
         return;
       }
 
       btn.disabled = true;
-      show('Skickar…', 'ok');
+      show(t('Skickar…'), 'ok');
       try {
         const res = await fetch(NEWSLETTER_ENDPOINT, {
           method: 'POST',
@@ -1622,15 +2104,15 @@
         });
         const data = await res.json();
         if (data.result === 'duplicate') {
-          show('Du prenumererar redan – tack!', 'ok');
+          show(t('Du prenumererar redan – tack!'), 'ok');
         } else if (data.result === 'ok') {
-          show('Tack! Du är nu anmäld till nyhetsbrevet.', 'ok');
+          show(t('Tack! Du är nu anmäld till nyhetsbrevet.'), 'ok');
           form.reset();
         } else {
           throw new Error(data.result);
         }
       } catch (err) {
-        show('Något gick fel. Försök igen, eller mejla mig direkt.', 'error');
+        show(t('Något gick fel. Försök igen, eller mejla mig direkt.'), 'error');
       } finally {
         btn.disabled = false;
       }
