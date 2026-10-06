@@ -229,15 +229,6 @@
       z-index: 2;
       max-width: 1100px;
     }
-    .hero-eyebrow {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--sage-light);
-      margin-top: 0.5rem;
-    }
     .hero-title {
       font-size: clamp(2rem, 4.5vw, 3.4rem);
       color: var(--white);
@@ -312,41 +303,6 @@
       color: var(--muted);
       margin-bottom: 1rem;
       font-weight: 300;
-    }
-
-    /* Comparison bullet lists */
-    .method-compare-list {
-      list-style: none;
-      margin-top: 1.25rem;
-      margin-bottom: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .method-compare-item {
-      padding-left: 1rem;
-      border-left: 2px solid var(--cream-dark);
-    }
-    .card-tt .method-compare-item  { border-color: var(--terra); }
-    .card-mv .method-compare-item  { border-color: var(--sage-dark); }
-    .method-compare-item.shared    { border-color: var(--sage-light); }
-    .method-dim {
-      display: block;
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 0.15rem;
-    }
-    .card-tt .method-dim  { color: var(--terra); }
-    .card-mv .method-dim  { color: var(--sage-dark); }
-    .method-compare-item.shared .method-dim { color: var(--sage); }
-    .method-compare-item p {
-      font-size: 0.875rem;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.55;
-      margin: 0;
     }
 
     /* Video CTA wrap */
@@ -472,7 +428,7 @@
       display: flex;
       gap: 0.6rem;
       align-items: flex-start;
-      margin: -1rem 0 1.5rem;
+      margin: 1.5rem 0 1.5rem;
       padding: 0.85rem 1rem;
       background: var(--cream);
       border-radius: 0.75rem;
@@ -709,17 +665,6 @@
       align-items: flex-start;
       gap: 0.8rem;
     }
-    .corp-cta-mail {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .corp-cta-mail:hover { color: var(--terra); }
-    .corp-cta-mail svg { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.7; }
 
     /* ─── EVENTS ───────────────────────────────────────────────── */
     #events { background: var(--cream-dark); }
@@ -1193,7 +1138,6 @@
   <div class="hero-content">
     <h1 class="hero-title">Skonsamma, kroppsbaserade metoder som hjälper ditt nervsystem att landa</h1>
     <p class="hero-sub">Så att du kan möta livet med större frihet och ro.</p>
-    <span class="hero-eyebrow">Nervsystemsbaserad terapi · Järna</span>
   </div>
 
 </section>
@@ -1214,22 +1158,9 @@
         <img class="method-card-image" src="assets/img_0465.jpg" alt="Transforming Touch – lätt beröring" />
         <div class="method-card-body">
           <h3>Nervsystemsreglering med Transforming Touch®</h3>
-          <p>En skonsam, regleringsfokuserad beröringsterapi som ger nervsystemet direkt tillgång till trygghet via kroppen. Utvecklad av Dr. Stephen Terrell för att möta stress, oro och mönster som formats tidigt i livet och som samtalet sällan når.</p>
-          <p>Du vilar fullt påklädd på en behandlingsbänk medan jag erbjuder lätt, stilla beröring. Nervsystemet får ta emot ett tryggt stöd – och lär sig, session för session, att landa.</p>
-          <ul class="method-compare-list">
-            <li class="method-compare-item">
-              <span class="method-dim">Kontakt</span>
-              <p>Jag håller lätt och stilla på punkter på kroppen</p>
-            </li>
-            <li class="method-compare-item shared">
-              <span class="method-dim">Bidrar till</span>
-              <p>Nervsystemsreglering, trygghet och ro</p>
-            </li>
-            <li class="method-compare-item">
-              <span class="method-dim">Passar särskilt vid</span>
-              <p>Stress, trauma, anknytning och svårighet att landa</p>
-            </li>
-          </ul>
+          <p>En beröringsbaserad metod med fokus på reglering, som stödjer nervsystemets naturliga förmåga till trygghet och ro. Utvecklad av Dr. Stephen Terrell för att möta stress, oro och mönster som formats tidigt i livet.</p>
+          <p>Under en session erbjuds lätt och respektfull beröring där stor vikt läggs på att du känner dig trygg och bekväm. Du vilar fullt påklädd på en behandlingsbänk under hela sessionen.</p>
+          <p>Syftet är att stödja din kropp att hitta vägar till ökad stabilitet, trygghet, och ro. Passar särskilt vid stress, anknytningstrauma och svårighet att landa.</p>
           <div class="method-online">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
             <span><strong>Finns även online.</strong> Du ligger bekvämt hemma och jag guidar dig via videosamtal.</span>
@@ -1263,22 +1194,9 @@
         <img class="method-card-image" src="assets/img_9456.jpg" alt="Feldenkrais" />
         <div class="method-card-body">
           <h3>Rörelsemedvetande med Feldenkrais®</h3>
-          <p>En utforskande rörelsepedagogik som lär upp nervsystemet inifrån genom långsamma rörelser och varsam uppmärksamhet. Istället för att rätta eller anstränga får hjärnan ny information, och gamla spännings- och rörelsemönster kan släppa.</p>
-          <p>Du ligger fullt påklädd på en behandlingsbänk medan jag varsamt rör och guidar kroppen i din takt. Många reser sig med en omedelbar känsla av lätthet – längre, mjukare, friare.</p>
-          <ul class="method-compare-list">
-            <li class="method-compare-item">
-              <span class="method-dim">Kontakt</span>
-              <p>Jag gör olika utforskanden och rörelser av kroppen</p>
-            </li>
-            <li class="method-compare-item shared">
-              <span class="method-dim">Bidrar till</span>
-              <p>Nervsystemsreglering, kroppskännedom och lätthet</p>
-            </li>
-            <li class="method-compare-item">
-              <span class="method-dim">Passar särskilt vid</span>
-              <p>Smärta, stelhet och önskan att röra sig friare</p>
-            </li>
-          </ul>
+          <p>En utforskande metod där små och långsamma rörelser som Feldenkraisterapeuten gör åt en bidrar till ökad självkännedom och att vi kan hitta ’nya möjligheter’ för att röra på oss. Vi lär oss att distribuera en rörelse genom hela kroppen och komma ur gamla spännings- och rörelsemönster. En potentiell uppgradering är att smärtor minskar och att vi får en ökad känsla av frihet.</p>
+          <p>När vi rör oss mer i harmoni med vår kropp och lär oss förstå våra gränser och vår kapacitet, börjar vi även att reglera nervsystemet och får mer energi och ro.</p>
+          <p>Du vilar fullt påklädd på en behandlingsbänk under hela sessionen.</p>
           <div class="method-meta">
             <div class="method-meta-row">
               <div class="method-meta-item">
@@ -1315,7 +1233,7 @@
       <div>
         <span class="section-label">Lyssna</span>
         <h3>Prova en Feldenkrais®-lektion hemma</h3>
-        <p>En liveinspelning av en ATM-lektion – Medvetenhet genom rörelse. Lägg dig bekvämt på golvet, ta det långsamt och följ med i din egen takt.</p>
+        <p>En liveinspelning av en grupplektion i rörelsemedvetande med Feldenkrais® med William, inspelad i Järna den 15 september 2026.</p>
         <audio controls preload="metadata" src="assets/feldenkrais-atm.m4a"></audio>
       </div>
     </div>
@@ -1528,11 +1446,7 @@
         <p>Jag är utbildad ingenjör och har arbetat många år inom managementkonsulting och snabbväxande bolag – jag känner den miljön inifrån. Upplägg och pris sätter vi utifrån omfattning. Berätta hur det ser ut hos er, så föreslår jag något som passar.</p>
       </div>
       <div class="corp-cta-action">
-        <a href="mailto:pwheden@gmail.com?subject=Nervsystemsarbete%20för%20företag" class="btn-primary">Kontakta mig</a>
-        <a href="mailto:pwheden@gmail.com" class="corp-cta-mail">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          pwheden@gmail.com
-        </a>
+        <a href="#contact" class="btn-primary">Kontakta mig</a>
       </div>
     </div>
 
@@ -1594,7 +1508,7 @@
   <div class="footer-main">
     <div class="footer-col">
       <div class="footer-brand">William Hedén</div>
-      <p class="footer-tagline">Nervsystemsbaserad terapi i Järna. Skonsamma metoder för kropp och nervsystem.</p>
+      <p class="footer-tagline">Skonsamma, kroppsbaserade metoder som hjälper ditt nervsystem att landa</p>
     </div>
     <div class="footer-col">
       <div class="footer-heading">Kontakt</div>
@@ -1710,7 +1624,6 @@
     // Hero
     'Skonsamma, kroppsbaserade metoder som hjälper ditt nervsystem att landa': 'Gentle, body-based methods that help your nervous system settle',
     'Så att du kan möta livet med större frihet och ro.': 'So you can meet life with greater freedom and ease.',
-    'Nervsystemsbaserad terapi · Järna': 'Nervous system based therapy · Järna',
 
     // Services
     'Kroppen bär det som orden inte når': 'The body holds what words cannot reach',
@@ -1722,15 +1635,18 @@
       'You don’t need to do anything special or perform. We start where you are, and you always stay fully clothed. In a Transforming Touch® session you lie comfortably while I offer light touch. In Feldenkrais® we explore simple movements together at your own pace. What matters most is that you feel safe.',
     'Transforming Touch – lätt beröring': 'Transforming Touch – light touch',
     'Nervsystemsreglering med Transforming Touch®': 'Nervous system regulation with Transforming Touch®',
-    'En skonsam, regleringsfokuserad beröringsterapi som ger nervsystemet direkt tillgång till trygghet via kroppen. Utvecklad av Dr. Stephen Terrell för att möta stress, oro och mönster som formats tidigt i livet och som samtalet sällan når.':
-      'A gentle, regulation-focused touch therapy that gives the nervous system direct access to safety through the body. Developed by Dr. Stephen Terrell to meet stress, anxiety and patterns formed early in life that talking rarely reaches.',
-    'Du vilar fullt påklädd på en behandlingsbänk medan jag erbjuder lätt, stilla beröring. Nervsystemet får ta emot ett tryggt stöd – och lär sig, session för session, att landa.':
-      'You rest fully clothed on a treatment table while I offer light, still touch. Your nervous system receives safe support – and learns, session by session, to settle.',
-    'Jag håller lätt och stilla på punkter på kroppen': 'I hold specific points on the body, lightly and still',
-    'Bidrar till': 'Supports',
-    'Nervsystemsreglering, trygghet och ro': 'Nervous system regulation, safety and calm',
-    'Passar särskilt vid': 'Especially helpful for',
-    'Stress, trauma, anknytning och svårighet att landa': 'Stress, trauma, attachment and difficulty settling',
+    'En beröringsbaserad metod med fokus på reglering, som stödjer nervsystemets naturliga förmåga till trygghet och ro. Utvecklad av Dr. Stephen Terrell för att möta stress, oro och mönster som formats tidigt i livet.':
+      'A touch-based method focused on regulation, supporting the nervous system’s natural capacity for safety and calm. Developed by Dr. Stephen Terrell to meet stress, anxiety and patterns formed early in life.',
+    'Under en session erbjuds lätt och respektfull beröring där stor vikt läggs på att du känner dig trygg och bekväm. Du vilar fullt påklädd på en behandlingsbänk under hela sessionen.':
+      'During a session, light and respectful touch is offered, with great care taken to make sure you feel safe and comfortable. You rest fully clothed on a treatment table throughout the session.',
+    'Syftet är att stödja din kropp att hitta vägar till ökad stabilitet, trygghet, och ro. Passar särskilt vid stress, anknytningstrauma och svårighet att landa.':
+      'The aim is to support your body in finding ways to greater stability, safety and calm. Especially helpful for stress, attachment trauma and difficulty settling.',
+    'En utforskande metod där små och långsamma rörelser som Feldenkraisterapeuten gör åt en bidrar till ökad självkännedom och att vi kan hitta ’nya möjligheter’ för att röra på oss. Vi lär oss att distribuera en rörelse genom hela kroppen och komma ur gamla spännings- och rörelsemönster. En potentiell uppgradering är att smärtor minskar och att vi får en ökad känsla av frihet.':
+      'An exploratory method in which small, slow movements that the Feldenkrais practitioner makes for you build greater self-awareness and help us find ‘new possibilities’ for how we move. We learn to distribute a movement through the whole body and step out of old patterns of tension and movement. A potential upgrade is less pain and a greater sense of freedom.',
+    'När vi rör oss mer i harmoni med vår kropp och lär oss förstå våra gränser och vår kapacitet, börjar vi även att reglera nervsystemet och får mer energi och ro.':
+      'As we move more in harmony with our body and learn to understand our limits and our capacity, we also begin to regulate the nervous system and gain more energy and calm.',
+    'Du vilar fullt påklädd på en behandlingsbänk under hela sessionen.':
+      'You rest fully clothed on a treatment table throughout the session.',
     'Finns även online.': 'Also available online.',
     'Du ligger bekvämt hemma och jag guidar dig via videosamtal.': 'You lie comfortably at home while I guide you over video call.',
     '50 minuter': '50 minutes',
@@ -1738,17 +1654,10 @@
     '1 000 kr inkl. moms': 'SEK 1,000 incl. VAT',
     '1 400 kr inkl. moms': 'SEK 1,400 incl. VAT',
     'Rörelsemedvetande med Feldenkrais®': 'Movement awareness with Feldenkrais®',
-    'En utforskande rörelsepedagogik som lär upp nervsystemet inifrån genom långsamma rörelser och varsam uppmärksamhet. Istället för att rätta eller anstränga får hjärnan ny information, och gamla spännings- och rörelsemönster kan släppa.':
-      'An exploratory approach to movement learning that retrains the nervous system from within through slow movements and gentle attention. Instead of correcting or straining, the brain receives new information, and old patterns of tension and movement can release.',
-    'Du ligger fullt påklädd på en behandlingsbänk medan jag varsamt rör och guidar kroppen i din takt. Många reser sig med en omedelbar känsla av lätthet – längre, mjukare, friare.':
-      'You lie fully clothed on a treatment table while I gently move and guide your body at your pace. Many people get up with an immediate sense of lightness – taller, softer, freer.',
-    'Jag gör olika utforskanden och rörelser av kroppen': 'I guide the body through gentle explorations and movements',
-    'Nervsystemsreglering, kroppskännedom och lätthet': 'Nervous system regulation, body awareness and ease',
-    'Smärta, stelhet och önskan att röra sig friare': 'Pain, stiffness and wanting to move more freely',
     'Lyssna': 'Listen',
     'Prova en Feldenkrais®-lektion hemma': 'Try a Feldenkrais® lesson at home',
-    'En liveinspelning av en ATM-lektion – Medvetenhet genom rörelse. Lägg dig bekvämt på golvet, ta det långsamt och följ med i din egen takt.':
-      'A live recording of an Awareness Through Movement® lesson (ATM). Lie down comfortably on the floor, take it slowly and follow along at your own pace.',
+    'En liveinspelning av en grupplektion i rörelsemedvetande med Feldenkrais® med William, inspelad i Järna den 15 september 2026.':
+      'A live recording of a group lesson in movement awareness with Feldenkrais®, led by William and recorded in Järna on 15 September 2026.',
 
     // Events
     'Evenemang': 'Events',
@@ -1850,7 +1759,6 @@
     'Redo att ta ett första steg?': 'Ready to take a first step?',
     'Hör av dig om du har frågor eller vill boka ett inledande samtal på 20 minuter – utan kostnad och utan förpliktelse.':
       'Get in touch if you have questions or would like to book a free, no-obligation 20-minute introductory call.',
-    'Nervsystemsbaserad terapi i Järna. Skonsamma metoder för kropp och nervsystem.': 'Nervous system based therapy in Järna. Gentle methods for body and nervous system.',
     'Bokning': 'Booking',
     'Nyhetsbrev': 'Newsletter',
     'Få nyheter om kvällar, kurser och lediga tider – några gånger per år.': 'News about evenings, courses and available times – a few times a year.',
