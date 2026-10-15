@@ -786,6 +786,12 @@
       padding: 0.25rem 0.7rem;
       white-space: nowrap;
     }
+    .event-date-chip.past {
+      color: var(--muted);
+      font-weight: 400;
+      text-decoration: line-through;
+    }
+    .event-paused strong { color: var(--terra); }
     .event-book {
       margin-top: auto;
       align-self: flex-start;
@@ -1670,7 +1676,8 @@
     'Kvällar för nervsystemsreglering i Gnesta': 'Nervous system regulation evenings in Gnesta',
     'Prova-på-kväll för nervsystemet i Järna': 'Taster evening for the nervous system in Järna',
     'kl': 'at',
-    'Fler tillfällen': 'More dates',
+    'Tillfällen': 'Dates',
+    'Pausat just nu – nya datum kommer': 'Paused for now – new dates coming',
     'Boka': 'Book',
 
     // Concepts
@@ -1869,8 +1876,8 @@
 
   // ─── Events carousel ──────────────────────────────────────────
   // Add/remove events here. Dates in ISO format (YYYY-MM-DD); past
-  // dates are filtered out automatically and the card hides itself
-  // when all its dates have passed. Add each new title to EN above.
+  // dates stay on the card struck through, and a card with no upcoming
+  // dates shows as paused. Add each new title to EN above.
   const eventsData = [
     {
       city: 'Gnesta',
@@ -1911,42 +1918,41 @@
     const fmt = (iso, opts) =>
       new Date(iso + 'T00:00:00').toLocaleDateString(lang === 'en' ? 'en-GB' : 'sv-SE', opts);
 
-    const cards = eventsData
-      .map(ev => ({ ...ev, upcoming: ev.dates.filter(d => new Date(d + 'T00:00:00') >= today).sort() }))
-      .filter(ev => ev.upcoming.length > 0);
+    const isPast = d => new Date(d + 'T00:00:00') < today;
 
-    if (cards.length === 0) {
+    if (eventsData.length === 0) {
       section.style.display = 'none';
       return;
     }
 
-    eventsTrack.innerHTML = cards.map(ev => {
-      const next = ev.upcoming[0];
-      const rest = ev.upcoming.slice(1);
-      const nextLabel = fmt(next, { weekday: 'long', day: 'numeric', month: 'long' });
-      const chips = rest.map(d =>
-        `<span class="event-date-chip">${fmt(d, { weekday: 'short', day: 'numeric', month: 'short' }).replace('.', '')}</span>`
+    eventsTrack.innerHTML = eventsData.map(ev => {
+      const dates = [...ev.dates].sort();
+      const next = dates.find(d => !isPast(d));
+      const nextLabel = next
+        ? `<strong>${fmt(next, { weekday: 'long', day: 'numeric', month: 'long' })}</strong> <span>· ${t('kl')} ${ev.time}</span>`
+        : `<strong>${t('Pausat just nu – nya datum kommer')}</strong>`;
+      const chips = dates.map(d =>
+        `<span class="event-date-chip${isPast(d) ? ' past' : ''}">${fmt(d, { weekday: 'short', day: 'numeric', month: 'short' }).replace('.', '')}</span>`
       ).join('');
       return `
       <article class="event-card">
         <span class="event-city">${ev.city}</span>
         <h3>${t(ev.title)}</h3>
         <div class="event-meta">
-          <div class="event-meta-item">
+          <div class="event-meta-item${next ? '' : ' event-paused'}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-            <div><strong>${nextLabel}</strong> <span>· ${t('kl')} ${ev.time}</span></div>
+            <div>${nextLabel}</div>
           </div>
           <div class="event-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             <div><strong>${ev.place}</strong> <span>· ${ev.address}</span></div>
           </div>
-          ${rest.length > 0 ? `
           <div>
-            <div class="event-dates-label">${t('Fler tillfällen')}</div>
+            <div class="event-dates-label">${t('Tillfällen')}</div>
             <div class="event-dates">${chips}</div>
-          </div>` : ''}
+          </div>
         </div>
-        <a href="${ev.link}" target="_blank" rel="noopener" class="btn-primary event-book">${t('Boka')}</a>
+        ${next ? `<a href="${ev.link}" target="_blank" rel="noopener" class="btn-primary event-book">${t('Boka')}</a>` : ''}
       </article>`;
     }).join('');
 
